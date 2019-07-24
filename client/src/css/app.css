@@ -1,0 +1,13 @@
+html, body {
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont,'Courier New', Courier, monospace;
+}
+
+:root { 
+  --blue: rgba(0, 177, 168, 0.75);
+  --red: rgba(94, 255, 94, 0.75);
+}
+
+.app-container {
+  background: linear-gradient(89deg, var(--red) 0%, var(--blue) 100% );
+}

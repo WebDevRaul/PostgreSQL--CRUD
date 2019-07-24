@@ -1,0 +1,14 @@
+@import './app.css';
+
+.sign-in {
+  min-height: 83.2vh;
+}
+.sign-in-header-bg {
+  background: linear-gradient(89deg, var(--red) 0%, var(--blue) 100% );
+}
+
+.test {
+  position: relative;
+  display: inline-block;
+  margin: 0 auto;
+}
