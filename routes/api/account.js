@@ -79,4 +79,11 @@ router.post('/sign-in', (req, res, next) => {
     .catch(error => next(error))
 })
 
+router.get('/', (req, res, next) => {
+  const { email } = req.body;
+  AccountTable.getAccount({ email })
+    .then(({ account }) => res.json({ id: account.id }))
+    .catch(e => next(e));
+})
+
 module.exports = router;
