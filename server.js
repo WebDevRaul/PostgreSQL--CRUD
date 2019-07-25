@@ -6,6 +6,7 @@ require('./config/passport')(passport);
 const path = require('path');
 
 const account = require('./routes/api/account');
+const item = require('./routes/api/item');
 
 const app = express();
 
@@ -17,7 +18,7 @@ app.use(passport.initialize());
 
 
 // Routes
-app.use('/account',account); 
+app.use('/account',account, item);
 
 // Error handling
 app.use((error, req, res, next) => {

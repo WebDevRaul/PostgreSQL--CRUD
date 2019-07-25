@@ -12,7 +12,6 @@ const { secretOrKey } = require('../../config/keys');
 const bcrypt = require('bcryptjs');
 const salt = bcrypt.genSaltSync(10);
 
-
 // Register
 router.post('/register', (req, res, next) => {
   const { first_name, last_name, email, password } = req.body;
