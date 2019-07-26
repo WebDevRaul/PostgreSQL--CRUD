@@ -3,7 +3,7 @@ const pool = require('../../pool');
 
 class AccountTable {
   
-  // STORE Account
+  // Create account
   static create_account({ first_name, last_name, email, password }) {
     return new Promise((resolve, reject) => {
       pool.query(
@@ -23,11 +23,25 @@ class AccountTable {
     });
   };
 
-  // GET Account
+  // Check account
+  static check_account({ email }) {
+    return new Promise((resolve, reject) => {
+      pool.query(
+        'SELECT email FROM account WHERE email=$1',
+        [email],
+        (e, respone) => {
+          if(e) return reject(e);
+          resolve({ success: true })
+        }
+      )
+    })
+  }
+
+  // Get account
   static get_account({ email }) {
     return new Promise((resolve, reject) => {
       pool.query(
-        'SELECT password FROM account WHERE email=$1',
+        'SELECT id, first_name, last_name, email, password FROM account WHERE email=$1',
         [email],
         (e, response) => {
           if(e) return reject(e);
@@ -37,7 +51,7 @@ class AccountTable {
     });
   };
 
-  // Get Account by ID
+  // Get account by ID
   static get_account_by_id({ id }) {
     return new Promise((resolve, reject) => {
       pool.query(
@@ -50,6 +64,29 @@ class AccountTable {
       )
     });
   };
+
+  // Get all account data
+  static get_all_account_data({ id }) {
+    return new Promise((resolve, reject) => {
+      pool.query(
+        `SELECT 
+          account.id, 
+          first_name, 
+          last_name, 
+          email, 
+          user_text 
+          FROM account INNER JOIN user_text_table 
+          ON user_text_table.account_id = account.id 
+          WHERE account.id=$1
+        `,
+        [id],
+        (e, response) => {
+          if(e) return reject(e);
+          resolve(response.rows[0])
+        }
+      )
+    })
+  }
 
 };
 

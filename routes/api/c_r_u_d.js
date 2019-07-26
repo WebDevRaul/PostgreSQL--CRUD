@@ -36,4 +36,15 @@ router.get('/recover-text', (req, res, next) => {
     .catch(e => next(e))
 });
 
+
+router.get('/all-account', (req, res, next) => {
+  const { id } = req.body;
+  
+  AccountTable.get_all_account_data({ id })
+    .then(acc => res.json(acc))
+    .catch(e => next(e))
+});
+
+
+
 module.exports = router;

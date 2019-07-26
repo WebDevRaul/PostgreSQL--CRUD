@@ -26,7 +26,7 @@ router.post('/register', (req, res, next) => {
   const password_hash = bcrypt.hashSync(password, salt);
 
   // Store account
-  AccountTable.get_account({ email })
+  AccountTable.check_account({ email })
     .then(({ account }) => {
       if(account) return res.status(409).json({ email: 'Email is already in use!' });
       return AccountTable.create_account({ 
