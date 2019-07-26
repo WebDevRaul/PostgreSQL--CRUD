@@ -36,6 +36,22 @@ class AccountTable {
       )
     });
   };
+
+  // Get Account by ID
+  static getAccountById({ id }) {
+    return new Promise((resolve, reject) => {
+      pool.query(
+        'SELECT id FROM account WHERE id=$1',
+        [id],
+        (error, response) => {
+          if(error) return reject(error);
+          resolve({ success: true });
+        }
+      )
+    });
+  };
+
 };
+
 
 module.exports = AccountTable;

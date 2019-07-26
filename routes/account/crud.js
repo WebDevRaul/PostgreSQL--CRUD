@@ -2,7 +2,7 @@ const pool = require('../../pool');
 
 class CrudTable {
 
-  // Store item
+  // Store text
   static storeText({ account_id, text }) {
     return new Promise((resolve, reject) => {
       pool.query(
@@ -13,8 +13,22 @@ class CrudTable {
           resolve({ message: 'Success!' })
         }
       )
-    })
-  }
+    });
+  };
+
+  // Get text
+  static recoverText({ account_id }) {
+    return new Promise((resolve, reject) => {
+      pool.query(
+        'SELECT text FROM crud WHERE account_id=$1',
+        [account_id],
+        (e, response) => {
+          if(e) return reject(e);
+          resolve({ text: response.rows });
+        }
+      )
+    });
+  };
 }
 
 module.exports = CrudTable;
