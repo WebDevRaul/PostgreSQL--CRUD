@@ -6,7 +6,7 @@ require('./config/passport')(passport);
 const path = require('path');
 
 const account = require('./routes/api/account');
-const crud = require('./routes/api/crud');
+const c_r_u_d = require('./routes/api/c_r_u_d');
 
 const app = express();
 
@@ -18,7 +18,7 @@ app.use(passport.initialize());
 
 
 // Routes
-app.use('/account',account, crud);
+app.use('/account',account, c_r_u_d);
 
 // Error handling
 app.use((error, req, res, next) => {

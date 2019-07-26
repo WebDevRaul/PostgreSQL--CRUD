@@ -1,12 +1,12 @@
 const pool = require('../../pool');
 
-class CrudTable {
+class TextTable {
 
   // Store text
-  static storeText({ account_id, text }) {
+  static create_text({ account_id, text }) {
     return new Promise((resolve, reject) => {
       pool.query(
-        'INSERT INTO crud(account_id, text) VALUES($1, $2)',
+        'INSERT INTO user_text_table(account_id, user_text) VALUES($1, $2)',
         [account_id, text],
         (e, response) => {
           if(e) return reject(e);
@@ -17,10 +17,10 @@ class CrudTable {
   };
 
   // Get text
-  static recoverText({ account_id }) {
+  static recover_text({ account_id }) {
     return new Promise((resolve, reject) => {
       pool.query(
-        'SELECT text FROM crud WHERE account_id=$1',
+        'SELECT user_text FROM user_text_table WHERE account_id=$1',
         [account_id],
         (e, response) => {
           if(e) return reject(e);
@@ -31,4 +31,4 @@ class CrudTable {
   };
 }
 
-module.exports = CrudTable;
+module.exports = TextTable;

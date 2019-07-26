@@ -26,19 +26,17 @@ router.post('/register', (req, res, next) => {
   const password_hash = bcrypt.hashSync(password, salt);
 
   // Store account
-  AccountTable.getAccount({ email })
+  AccountTable.get_account({ email })
     .then(({ account }) => {
       if(account) return res.status(409).json({ email: 'Email is already in use!' });
-      else {
-        return AccountTable.storeAccount({ 
-          first_name: first_name_hash,
-          last_name: last_name_hash,
-          email,
-          password: password_hash
-        })
-        .then(({ message }) => res.json({ message }))
-        .catch(error => next(error))
-      }
+      return AccountTable.create_account({ 
+        first_name: first_name_hash,
+        last_name: last_name_hash,
+        email,
+        password: password_hash
+      })
+      .then(({ message }) => res.json({ message }))
+      .catch(error => next(error))
     });
 });
 
@@ -46,7 +44,7 @@ router.post('/register', (req, res, next) => {
 router.post('/sign-in', (req, res, next) => {
   const { email, password } = req.body;
 
-  AccountTable.getAccount({ email })
+  AccountTable.get_account({ email })
     .then(({ account }) => {
       if(!account) {
         return res.status(409).json({ email: 'Incorrect email or password!', password: 'Incorrect email or password!' })
