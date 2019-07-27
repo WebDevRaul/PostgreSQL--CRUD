@@ -4,19 +4,12 @@ import React, { Component } from 'react';
 import LabelInput from '../common/components/Label_Input';
 import Crud from './Crud';
 
+// Redux
+import { connect } from 'react-redux';
+
+
 // Css
 import '../../css/dashboard.css';
-
-const db = [
-  {
-    id: '1',
-    text: 'one'
-  },
-  {
-    id: '2',
-    text: 'two'
-  }
-]
 
 class Dashboard extends Component {
   constructor() {
@@ -42,15 +35,17 @@ class Dashboard extends Component {
 
   render() {
     const { user_text, errors } = this.state;
+    const { posts } = this.props.account.account.user;
 
-    const item = db.map(({ id, text }) => 
+    const post = posts.map(({ post, post_id }) => 
       <Crud
-        key={id}
-        text={text}
+        key={post_id}
+        post={post}
         onDelete={this.onDelete}
-        id={id}
+        id={post_id}
       />
-    )
+    );
+
     return (
       <div className='dashboard d-flex pl-3 pr-3'>
         <div className='m-auto'>
@@ -81,14 +76,18 @@ class Dashboard extends Component {
                     <button className='btn btn-primary float-right'>Add</button>
                   </div>
                 </div>
-                  {item}
+                  {post}
               </form>
             </div>
           </div>
         </div>
       </div>
     )
-  }
-}
+  };
+};
 
-export default Dashboard;
+const mapStateToProps = state => ({
+  account: state.account
+});
+
+export default connect( mapStateToProps, {} )(Dashboard);

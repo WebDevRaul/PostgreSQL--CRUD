@@ -8,12 +8,12 @@ class Crud extends Component {
     this.state = {
       edit: false,
       error: '',
-      text: ''
+      post: ''
     }
   }
 
   componentDidMount() {
-    this.setState({ text: this.props.text })
+    this.setState({ post: this.props.post })
   }
 
   onEdit = () => {
@@ -21,7 +21,7 @@ class Crud extends Component {
   }
 
   onChange = e => {
-    this.setState({ text: e.target.value })
+    this.setState({ post: e.target.value })
   }
 
   onDelete = id => () => {
@@ -30,7 +30,7 @@ class Crud extends Component {
   
   render() {
     const { id } = this.props;
-    const { edit, text, error } = this.state;
+    const { edit, post, error } = this.state;
     return (
       <div className='row no-gutters mb-3'>
         <div className='col-9'>
@@ -40,7 +40,7 @@ class Crud extends Component {
                 <input
                   type='text'
                   className={classnames('form-control form-control-lg', {'is-invalid' : error})}
-                  value={text}
+                  value={post}
                   onChange={this.onChange}
                   disabled={edit ? false : true}
                 />
@@ -70,8 +70,6 @@ class Crud extends Component {
   
   Crud.propTypes = {
     onDelete: PropTypes.func.isRequired,
-    text: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
   };
   
   export default Crud;

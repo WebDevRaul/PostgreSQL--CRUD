@@ -7,7 +7,8 @@ const initialState = {
       id: '',
       first_name: '',
       last_name: '',
-      email: ''
+      email: '',
+      posts: []
     },
     isAuth: {
       isAuthenticated: false
@@ -26,7 +27,8 @@ const account = (state=initialState, action) => {
             id: action.payload.id,
             first_name: action.payload.first_name,
             last_name: action.payload.last_name,
-            email: action.payload.email
+            email: action.payload.email,
+            posts: action.payload.posts
           },
           isAuth: { isAuthenticated: !isEmpty(action.payload) }
         }
