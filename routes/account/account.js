@@ -74,15 +74,15 @@ class AccountTable {
           first_name, 
           last_name, 
           email, 
-          user_text 
-          FROM account INNER JOIN user_text_table 
-          ON user_text_table.account_id = account.id 
+          post
+          FROM account INNER JOIN posts 
+          ON posts.account_id = account.id 
           WHERE account.id=$1
         `,
         [id],
         (e, response) => {
           if(e) return reject(e);
-          resolve(response.rows[0])
+          resolve(response.rows)
         }
       )
     })

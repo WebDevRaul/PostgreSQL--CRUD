@@ -7,10 +7,10 @@ echo 'Configuring dragonstackdb';
 
 # DROP TABLE account
 psql $credentials < ./sql/reset/reset_account.sql
-psql $credentials < ./sql/reset/reset_user_text.sql
+psql $credentials < ./sql/reset/reset_posts.sql
 
 # CREATE TABLE
 psql $credentials < ./sql/account.sql
-psql $credentials < ./sql/user_text.sql
+psql $credentials < ./sql/posts.sql
 
 echo 'dragonstackdb configured'

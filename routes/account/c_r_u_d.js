@@ -3,11 +3,11 @@ const pool = require('../../pool');
 class TextTable {
 
   // Store text
-  static create_text({ account_id, text }) {
+  static create_post({ account_id, post }) {
     return new Promise((resolve, reject) => {
       pool.query(
-        'INSERT INTO user_text_table(account_id, user_text) VALUES($1, $2)',
-        [account_id, text],
+        'INSERT INTO posts(account_id, post) VALUES($1, $2)',
+        [account_id, post],
         (e, response) => {
           if(e) return reject(e);
           resolve({ message: 'Success!' })
@@ -17,14 +17,14 @@ class TextTable {
   };
 
   // Get text
-  static recover_text({ account_id }) {
+  static recover_post({ account_id }) {
     return new Promise((resolve, reject) => {
       pool.query(
-        'SELECT user_text FROM user_text_table WHERE account_id=$1',
+        'SELECT post FROM posts WHERE account_id=$1',
         [account_id],
         (e, response) => {
           if(e) return reject(e);
-          resolve({ text: response.rows });
+          resolve({ post: response.rows });
         }
       )
     });
