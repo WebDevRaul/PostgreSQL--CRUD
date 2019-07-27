@@ -40,7 +40,7 @@ router.get('/recover-post', (req, res, next) => {
 router.get('/all-account', (req, res, next) => {
   const { email } = req.body;
   
-  AccountTable.get_all_account_data({ email })
+  AccountTable.get_account({ email })
     .then(acc => res.json(acc))
     .catch(e => next(e))
 });

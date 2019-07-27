@@ -37,15 +37,32 @@ class AccountTable {
     })
   }
 
-  // Get account
+  // Get all account data
   static get_account({ email }) {
     return new Promise((resolve, reject) => {
       pool.query(
-        'SELECT id, first_name, last_name, email, password FROM account WHERE email=$1',
+        `SELECT
+          account.id,
+          first_name,
+          last_name,
+          email,
+          password,
+          post,
+          posts.id post_id
+          FROM account LEFT JOIN posts ON account.id = posts.account_id
+          WHERE email = $1
+        `,
         [email],
         (e, response) => {
           if(e) return reject(e);
-          resolve({ account: response.rows[0] });
+          const data = response.rows
+          // Return just 1 row of account data and 1 array of posts
+          const { id, first_name, last_name, email, password } = data[0];
+          let posts = [];
+          data.map(({ post, post_id }) => posts.push({ post, post_id }))
+          
+          const account = { id, first_name, last_name, email, password, posts };
+          resolve({ account })
         }
       )
     });
@@ -64,30 +81,6 @@ class AccountTable {
       )
     });
   };
-
-  // Get all account data
-  static get_all_account_data({ email }) {
-    return new Promise((resolve, reject) => {
-      pool.query(
-        `SELECT
-          account.id,
-          first_name,
-          last_name,
-          email,
-          password,
-          post,
-          posts.id post_id
-          FROM account LEFT JOIN posts ON account.id = posts.account_id
-          WHERE email = $1
-        `,
-        [email],
-        (e, response) => {
-          if(e) return reject(e);
-          resolve(response.rows)
-        }
-      )
-    })
-  }
 
 };
 

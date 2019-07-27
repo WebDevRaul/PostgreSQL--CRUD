@@ -77,4 +77,11 @@ router.post('/sign-in', (req, res, next) => {
     .catch(error => next(error))
 })
 
+router.post('/test', (req, res, next) => {
+  const { email } = req.body;
+  AccountTable.get_account({ email })
+    .then(({ account }) =>  res.json({ account }) )
+    .catch(e => next(e));
+})
+
 module.exports = router;
