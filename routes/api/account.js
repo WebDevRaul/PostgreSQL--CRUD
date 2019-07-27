@@ -57,7 +57,8 @@ router.post('/sign-in', (req, res, next) => {
           id: account.id, 
           first_name:  decrypt(account.first_name, secretOrKey), 
           last_name: decrypt(account.last_name, secretOrKey), 
-          email
+          email,
+          posts: account.posts
         };
         jwt.sign(
           user,
@@ -75,13 +76,6 @@ router.post('/sign-in', (req, res, next) => {
       }
     })
     .catch(error => next(error))
-})
-
-router.post('/test', (req, res, next) => {
-  const { email } = req.body;
-  AccountTable.get_account({ email })
-    .then(({ account }) =>  res.json({ account }) )
-    .catch(e => next(e));
 })
 
 module.exports = router;
