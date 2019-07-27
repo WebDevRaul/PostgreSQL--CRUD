@@ -20,7 +20,7 @@ class TextTable {
   static recover_post({ account_id }) {
     return new Promise((resolve, reject) => {
       pool.query(
-        'SELECT post FROM posts WHERE account_id=$1',
+        'SELECT post, id FROM posts WHERE account_id=$1',
         [account_id],
         (e, response) => {
           if(e) return reject(e);

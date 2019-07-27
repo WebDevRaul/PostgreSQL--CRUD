@@ -66,20 +66,21 @@ class AccountTable {
   };
 
   // Get all account data
-  static get_all_account_data({ id }) {
+  static get_all_account_data({ email }) {
     return new Promise((resolve, reject) => {
       pool.query(
-        `SELECT 
-          account.id, 
-          first_name, 
-          last_name, 
-          email, 
-          post
-          FROM account INNER JOIN posts 
-          ON posts.account_id = account.id 
-          WHERE account.id=$1
+        `SELECT
+          account.id,
+          first_name,
+          last_name,
+          email,
+          password,
+          post,
+          posts.id post_id
+          FROM account LEFT JOIN posts ON account.id = posts.account_id
+          WHERE email = $1
         `,
-        [id],
+        [email],
         (e, response) => {
           if(e) return reject(e);
           resolve(response.rows)

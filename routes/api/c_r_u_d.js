@@ -38,9 +38,9 @@ router.get('/recover-post', (req, res, next) => {
 
 
 router.get('/all-account', (req, res, next) => {
-  const { id } = req.body;
+  const { email } = req.body;
   
-  AccountTable.get_all_account_data({ id })
+  AccountTable.get_all_account_data({ email })
     .then(acc => res.json(acc))
     .catch(e => next(e))
 });
