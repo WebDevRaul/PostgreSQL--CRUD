@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 // Components
 import LabelInput from '../common/components/Label_Input';
@@ -6,6 +7,7 @@ import Crud from './Crud';
 
 // Redux
 import { connect } from 'react-redux';
+import { add_post } from '../../redux/actions/post';
 
 
 // Css
@@ -15,14 +17,19 @@ class Dashboard extends Component {
   constructor() {
     super();
     this.state = {
-      user_text: '',
+      add_post: '',
       errors: ''
     }
   }
 
   onSubmit = e => {
     e.preventDefault();
+    const data = {
+      id: this.props.account.account.user.id,
+      post: this.state.add_post
+    };
 
+    this.props.add_post(data)
   }
 
   onDelete = id => {
@@ -34,10 +41,10 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { user_text, errors } = this.state;
+    const { add_post, errors } = this.state;
     const { posts } = this.props.account.account.user;
 
-    const post = posts.map(({ post, post_id }) => 
+    const data = posts.map(({ post, post_id }) => 
       <Crud
         key={post_id}
         post={post}
@@ -66,9 +73,9 @@ class Dashboard extends Component {
                       text='Text'
                       type='text'
                       icon='far fa-plus-square'
-                      name='user_text'
+                      name='add_post'
                       onChange={this.onChange}
-                      value={user_text}
+                      value={add_post}
                       error={errors}
                     />
                   </div>
@@ -76,7 +83,7 @@ class Dashboard extends Component {
                     <button className='btn btn-primary float-right'>Add</button>
                   </div>
                 </div>
-                  {post}
+                  {data}
               </form>
             </div>
           </div>
@@ -86,8 +93,12 @@ class Dashboard extends Component {
   };
 };
 
+Dashboard.propTypes = {
+  account: PropTypes.object.isRequired
+};
+
 const mapStateToProps = state => ({
   account: state.account
 });
 
-export default connect( mapStateToProps, {} )(Dashboard);
+export default connect( mapStateToProps, { add_post } )(Dashboard);

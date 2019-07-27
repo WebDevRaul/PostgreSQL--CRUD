@@ -9,4 +9,10 @@ const ACCOUNT = {
   SIGN_IN_USER: 'SIGN_IN_USER'
 };
 
-export { ERRORS, ACCOUNT }
+const POST = {
+  ADD_POST: 'ADD_POST',
+  UPDATE_POST: 'UPDATE_POST',
+  DELETE_POST: 'DELETE_POST'
+}
+
+export { ERRORS, ACCOUNT, POST }

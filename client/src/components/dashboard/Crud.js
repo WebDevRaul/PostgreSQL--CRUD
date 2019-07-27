@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import classnames from 'classnames';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 
 class Crud extends Component {
   constructor() {
@@ -70,6 +70,8 @@ class Crud extends Component {
   
   Crud.propTypes = {
     onDelete: PropTypes.func.isRequired,
+    id: PropTypes.string.isRequired,
+    post: PropTypes.string.isRequired
   };
   
   export default Crud;
