@@ -14,7 +14,11 @@ router.post('/add-post', (req, res, next) => {
       if(!success) return res.status(404).json({ message: 'Error!' });
       // Continue to store text
       TextTable.create_post({ id, post })
-      .then(({ message }) => res.json(message))
+      .then(({ message }) => {
+        if(!message) return res.js({ error: 'An error has occurred.' });
+        TextTable.recover_post({ id })
+          .then(({ post }) => res.json({ post }))
+      })
       .catch(e => next(e))
     })
     .catch(e => next(e));

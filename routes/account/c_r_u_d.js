@@ -10,7 +10,7 @@ class TextTable {
         [id, post],
         (e, response) => {
           if(e) return reject(e);
-          resolve({ message: 'Success!' })
+          resolve({ message: true })
         }
       )
     });

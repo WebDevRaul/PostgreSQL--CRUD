@@ -7,7 +7,7 @@ export const add_post = data => dispatch => {
     .post(`${URL.account}/add-post`, data)
     .then(res => dispatch({
       type: POST.ADD_POST,
-      payload: res.data.message
+      payload: res.data.post
     }))
     .catch(e => dispatch({
       type: ERRORS.ERROR,
