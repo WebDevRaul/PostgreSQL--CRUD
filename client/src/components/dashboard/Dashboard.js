@@ -7,7 +7,7 @@ import Crud from './Crud';
 
 // Redux
 import { connect } from 'react-redux';
-import { add_post } from '../../redux/actions/post';
+import { add_post, set_post } from '../../redux/actions/post';
 
 
 // Css
@@ -20,6 +20,12 @@ class Dashboard extends Component {
       add_post: '',
       errors: ''
     }
+  }
+
+  componentDidMount() {
+    // Fetch the posts
+    const { id } = this.props.account.account.user;
+    this.props.set_post(id);
   }
 
   onSubmit = e => {
@@ -103,4 +109,4 @@ const mapStateToProps = state => ({
   posts: state.posts
 });
 
-export default connect( mapStateToProps, { add_post } )(Dashboard);
+export default connect( mapStateToProps, { add_post, set_post } )(Dashboard);

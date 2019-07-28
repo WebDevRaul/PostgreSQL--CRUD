@@ -5,7 +5,6 @@ import jwt_decode from 'jwt-decode';
 // Redux
 import setAuthToken from './utils/setAuthToken';
 import { setCurrentUser, sign_out } from './redux/actions/authentication';
-import { set_posts } from './redux/actions/post';
 
 // Components
 import Home from './components/home/Home';
@@ -33,10 +32,7 @@ if (localStorage.jwtToken) {
   const decoded = jwt_decode(localStorage.jwtToken);
   // Sign-in User
   setAuthToken(localStorage.jwtToken);
-  // Extract posts for its own reducer
-  const { posts } = decoded;
   store.dispatch(setCurrentUser(decoded));
-  store.dispatch(set_posts(posts))
 
   const currentTime = Date.now() / 1000;
   if (decoded.exp < currentTime) {

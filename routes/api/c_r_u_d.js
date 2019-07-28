@@ -27,6 +27,7 @@ router.post('/add-post', (req, res, next) => {
 // Read text
 router.get('/post', (req, res, next) => {
   const { id } = req.body;
+  console.log(req.body, 'test')
   
   AccountTable.get_account_by_id({ id })
     .then(({ success }) => {

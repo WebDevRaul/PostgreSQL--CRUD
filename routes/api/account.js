@@ -57,8 +57,7 @@ router.post('/sign-in', (req, res, next) => {
           id: account.id, 
           first_name:  decrypt(account.first_name, secretOrKey), 
           last_name: decrypt(account.last_name, secretOrKey), 
-          email,
-          posts: account.posts
+          email
         };
         jwt.sign(
           user,
