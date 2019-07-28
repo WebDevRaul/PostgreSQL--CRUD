@@ -14,3 +14,10 @@ export const add_post = data => dispatch => {
       payload: e.response.data
     }));
 };
+
+export const set_posts = data => {
+  return {
+    type: POST.SET_POST,
+    payload: data
+  }
+};

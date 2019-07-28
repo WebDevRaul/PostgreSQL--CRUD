@@ -42,7 +42,7 @@ class Dashboard extends Component {
 
   render() {
     const { add_post, errors } = this.state;
-    const { posts } = this.props.account.account.user;
+    const { posts } = this.props.posts;
 
     const data = posts.map(({ post, post_id }) => 
       <Crud
@@ -94,11 +94,13 @@ class Dashboard extends Component {
 };
 
 Dashboard.propTypes = {
-  account: PropTypes.object.isRequired
+  account: PropTypes.object.isRequired,
+  posts: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  account: state.account
+  account: state.account,
+  posts: state.posts
 });
 
 export default connect( mapStateToProps, { add_post } )(Dashboard);

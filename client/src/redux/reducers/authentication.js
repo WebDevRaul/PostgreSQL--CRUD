@@ -1,4 +1,4 @@
-import { ACCOUNT, POST } from '../actions/types';
+import { ACCOUNT } from '../actions/types';
 import isEmpty from '../../validation/isEmpty';
 
 const initialState = {
@@ -7,8 +7,7 @@ const initialState = {
       id: '',
       first_name: '',
       last_name: '',
-      email: '',
-      posts: []
+      email: ''
     },
     isAuth: {
       isAuthenticated: false
@@ -28,20 +27,8 @@ const account = (state=initialState, action) => {
             first_name: action.payload.first_name,
             last_name: action.payload.last_name,
             email: action.payload.email,
-            posts: action.payload.posts
           },
           isAuth: { isAuthenticated: !isEmpty(action.payload) }
-        }
-      }
-    case POST.ADD_POST:
-      return {
-        ...state,
-        account: {
-          ...state.account,
-          user: {
-            ...state.account.user,
-            posts: action.payload
-          }
         }
       }
     default:
