@@ -18,6 +18,7 @@ router.post('/add-post', (req, res, next) => {
         if(!message) return res.js({ error: 'An error has occurred.' });
         TextTable.recover_post({ id })
           .then(({ post }) => res.json({ post }))
+          .catch(e => next(e))
       })
       .catch(e => next(e))
     })
@@ -25,9 +26,8 @@ router.post('/add-post', (req, res, next) => {
 })
 
 // Read text
-router.get('/post', (req, res, next) => {
+router.post('/post', (req, res, next) => {
   const { id } = req.body;
-  console.log(req.body, 'test')
   
   AccountTable.get_account_by_id({ id })
     .then(({ success }) => {

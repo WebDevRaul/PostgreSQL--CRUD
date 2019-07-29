@@ -12,8 +12,8 @@ const app = express();
 
 //   ##  MIDDLEWARE   ##   //
 // Body parser middleware
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 // Passport middleware
 app.use(passport.initialize());
 

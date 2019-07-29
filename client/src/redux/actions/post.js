@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export const set_post = id => dispatch => {
   axios
-    .get(`${URL.account}/post`, id)
+    .post(`${URL.account}/post`, id)
     .then(res => dispatch({
       type: POST.SET_POST,
       payload: res.data.post
