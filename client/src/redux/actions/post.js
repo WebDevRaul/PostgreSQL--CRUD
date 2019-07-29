@@ -22,8 +22,9 @@ export const add_post = data => dispatch => {
       type: POST.ADD_POST,
       payload: res.data.post
     }))
-    .catch(e => dispatch({
-      type: ERRORS.ERROR,
-      payload: e.response.data
-    }));
+    .catch(e => console.log(e))
+    // .catch(e => dispatch({
+    //   type: ERRORS.ERROR,
+    //   payload: e.response.data
+    // }));
 };

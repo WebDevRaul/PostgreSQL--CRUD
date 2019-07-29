@@ -11,6 +11,11 @@ const posts = (state=initialState, action) => {
         ...state,
         posts: action.payload
       }
+    case POST.ADD_POST:
+      return {
+        ...state,
+        posts: action.payload
+      }
     default:
       return state; 
   };

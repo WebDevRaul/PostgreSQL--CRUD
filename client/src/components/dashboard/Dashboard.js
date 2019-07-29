@@ -25,7 +25,7 @@ class Dashboard extends Component {
   componentDidMount() {
     // Fetch the posts
     const { id } = this.props.account.account.user;
-    this.props.set_post(id);
+    this.props.set_post(({id}));
   }
 
   onSubmit = e => {
@@ -34,8 +34,10 @@ class Dashboard extends Component {
       id: this.props.account.account.user.id,
       post: this.state.add_post
     };
-
-    this.props.add_post(data)
+    // Add post
+    this.props.add_post(data);
+    // reset post state;
+    this.setState({ add_post: '' })
   }
 
   onDelete = id => {
@@ -50,14 +52,18 @@ class Dashboard extends Component {
     const { add_post, errors } = this.state;
     const { posts } = this.props.posts;
 
-    const data = posts.map(({ post, post_id }) => 
-      <Crud
-        key={post_id}
-        post={post}
-        onDelete={this.onDelete}
-        id={post_id}
-      />
-    );
+    let crud_posts;
+
+    if(posts.length !== 0) {
+      crud_posts = posts.map(({ post, id }) => 
+        <Crud
+          key={id}
+          post={post}
+          onDelete={this.onDelete}
+          id={id}
+        />
+      );
+    }
 
     return (
       <div className='dashboard d-flex pl-3 pr-3'>
@@ -89,7 +95,7 @@ class Dashboard extends Component {
                     <button className='btn btn-primary float-right'>Add</button>
                   </div>
                 </div>
-                  {data}
+                  {crud_posts}
               </form>
             </div>
           </div>
