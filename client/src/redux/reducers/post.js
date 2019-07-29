@@ -1,10 +1,12 @@
 import { POST } from '../actions/types';
 
 const initialState = {
-  posts: []
+  posts: [],
+  test: []
 };
 
 const posts = (state=initialState, action) => {
+  console.log(action.payload)
   switch(action.type) {
     case POST.SET_POST:
       return {
@@ -15,6 +17,11 @@ const posts = (state=initialState, action) => {
       return {
         ...state,
         posts: action.payload
+      }
+    case POST.DELETE_ONE_POST:
+      return {
+        ...state,
+        test: posts.filter(item => item.id === 'b6f75f2a-b22a-11e9-acc0-0221deac008e')
       }
     default:
       return state; 

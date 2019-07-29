@@ -36,7 +36,7 @@ router.post('/register', (req, res, next) => {
         password: password_hash
       })
       .then(({ message }) => res.json({ message }))
-      .catch(error => next(error))
+      .catch(e => next(e))
     });
 });
 
@@ -74,7 +74,7 @@ router.post('/sign-in', (req, res, next) => {
         return res.status(409).json({ email: 'Incorrect email or password!', password: 'Incorrect email or password!' })
       }
     })
-    .catch(error => next(error))
+    .catch(e => next(e))
 })
 
 module.exports = router;

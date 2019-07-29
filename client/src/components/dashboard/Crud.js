@@ -69,9 +69,9 @@ class Crud extends Component {
 };
   
   Crud.propTypes = {
-    onDelete: PropTypes.func.isRequired,
     id: PropTypes.string.isRequired,
-    post: PropTypes.string.isRequired
+    post: PropTypes.string.isRequired,
+    onDelete: PropTypes.func.isRequired
   };
   
   export default Crud;

@@ -22,9 +22,22 @@ export const add_post = data => dispatch => {
       type: POST.ADD_POST,
       payload: res.data.post
     }))
-    .catch(e => console.log(e))
-    // .catch(e => dispatch({
-    //   type: ERRORS.ERROR,
-    //   payload: e.response.data
-    // }));
+    .catch(e => dispatch({
+      type: ERRORS.ERROR,
+      payload: e.response.data
+    }));
+};
+
+export const delete_post = data => dispatch => {
+  console.log(data)
+  axios
+    .post(`${URL.account}/patch-post`, data)
+    .then(res => dispatch({
+      type: POST.DELETE_ONE_POST,
+      payload: data.id
+    }))
+    .catch(e => dispatch({
+      type: ERRORS.ERROR,
+      payload: e.response.data
+    }))
 };

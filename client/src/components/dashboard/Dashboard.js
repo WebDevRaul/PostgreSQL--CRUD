@@ -7,7 +7,7 @@ import Crud from './Crud';
 
 // Redux
 import { connect } from 'react-redux';
-import { add_post, set_post } from '../../redux/actions/post';
+import { add_post, set_post, delete_post } from '../../redux/actions/post';
 
 
 // Css
@@ -41,7 +41,9 @@ class Dashboard extends Component {
   }
 
   onDelete = id => {
-
+    const account_id = this.props.account.account.user.id;
+    const data = { id, account_id }
+    this.props.delete_post(data)
   }
 
   onChange = e => {
@@ -53,6 +55,9 @@ class Dashboard extends Component {
     const { posts } = this.props.posts;
 
     let crud_posts;
+
+    // const data = posts.filter(item => item.id !== 'b6f75f2a-b22a-11e9-acc0-0221deac008e')
+    // console.log(data);
 
     if(posts.length !== 0) {
       crud_posts = posts.map(({ post, id }) => 
@@ -95,8 +100,8 @@ class Dashboard extends Component {
                     <button className='btn btn-primary float-right'>Add</button>
                   </div>
                 </div>
-                  {crud_posts}
               </form>
+              {crud_posts}
             </div>
           </div>
         </div>
@@ -115,4 +120,4 @@ const mapStateToProps = state => ({
   posts: state.posts
 });
 
-export default connect( mapStateToProps, { add_post, set_post } )(Dashboard);
+export default connect( mapStateToProps, { add_post, set_post, delete_post } )(Dashboard);

@@ -12,9 +12,9 @@ export const register = (user_data, history) => dispatch => {
       payload: res.data.message
     }))
     .then(() => history.push('/sign-in'))
-    .catch(err => dispatch({
+    .catch(e => dispatch({
       type: ERRORS.ERROR,
-      payload: err.response.data
+      payload: e.response.data
     }));
 };
 
@@ -31,9 +31,9 @@ export const sign_in = user_data => dispatch => {
       
       dispatch(setCurrentUser(decoded));
     })
-    .catch(err => dispatch({
+    .catch(e => dispatch({
       type: ERRORS.ERROR,
-      payload: err.response.data
+      payload: e.response.data
     }))
 }
 

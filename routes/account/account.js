@@ -15,8 +15,8 @@ class AccountTable {
           )
           VALUES($1, $2, $3, $4)`,
           [first_name, last_name, email, password],
-          (e, response) => {
-            if(e) return reject(e);
+          (error, response) => {
+            if(error) return reject(error);
             resolve({ message: 'You have successfully registered!' })
           }
       )
@@ -29,8 +29,8 @@ class AccountTable {
       pool.query(
         'SELECT email FROM account WHERE email=$1',
         [email],
-        (e, respone) => {
-          if(e) return reject(e);
+        (error, respone) => {
+          if(error) return reject(error);
           resolve({ success: true })
         }
       )
@@ -53,8 +53,8 @@ class AccountTable {
           WHERE email = $1
         `,
         [email],
-        (e, response) => {
-          if(e) return reject(e);
+        (error, response) => {
+          if(error) return reject(error);
           const data = response.rows
           // Return just 1 row of account data and 1 array of posts
           const { id, first_name, last_name, email, password } = data[0];
@@ -74,8 +74,8 @@ class AccountTable {
       pool.query(
         'SELECT id FROM account WHERE id=$1',
         [id],
-        (e, response) => {
-          if(e) return reject(e);
+        (error, response) => {
+          if(error) return reject(error);
           resolve({ success: true });
         }
       )
