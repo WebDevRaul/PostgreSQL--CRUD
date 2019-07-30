@@ -1,3 +1,4 @@
 module.exports = {
-  account: '/account'
+  account: '/account',
+  post: '/account/dashboard'
 }

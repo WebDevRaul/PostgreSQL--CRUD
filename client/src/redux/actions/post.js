@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export const set_post = id => dispatch => {
   axios
-    .post(`${URL.account}/post`, id)
+    .post(`${URL.post}/post`, id)
     .then(res => dispatch({
       type: POST.SET_POST,
       payload: res.data.post
@@ -17,7 +17,7 @@ export const set_post = id => dispatch => {
 
 export const add_post = data => dispatch => {
   axios
-    .post(`${URL.account}/add-post`, data)
+    .post(`${URL.post}/add-post`, data)
     .then(res => dispatch({
       type: POST.ADD_POST,
       payload: res.data.post
@@ -29,15 +29,14 @@ export const add_post = data => dispatch => {
 };
 
 export const delete_post = data => dispatch => {
-  console.log(data)
   axios
-    .post(`${URL.account}/patch-post`, data)
-    .then(res => dispatch({
+    .post(`${URL.post}/delete-post`, data)
+    .then(success => dispatch({
       type: POST.DELETE_ONE_POST,
       payload: data.id
     }))
     .catch(e => dispatch({
       type: ERRORS.ERROR,
       payload: e.response.data
-    }))
+    }));
 };

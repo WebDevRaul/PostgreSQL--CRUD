@@ -54,13 +54,7 @@ class Dashboard extends Component {
     const { add_post, errors } = this.state;
     const { posts } = this.props.posts;
 
-    let crud_posts;
-
-    // const data = posts.filter(item => item.id !== 'b6f75f2a-b22a-11e9-acc0-0221deac008e')
-    // console.log(data);
-
-    if(posts.length !== 0) {
-      crud_posts = posts.map(({ post, id }) => 
+    const crud_posts = posts.map(({ post, id }) => 
         <Crud
           key={id}
           post={post}
@@ -68,7 +62,6 @@ class Dashboard extends Component {
           id={id}
         />
       );
-    }
 
     return (
       <div className='dashboard d-flex pl-3 pr-3'>
@@ -112,7 +105,10 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
   account: PropTypes.object.isRequired,
-  posts: PropTypes.object.isRequired
+  posts: PropTypes.object.isRequired,
+  add_post: PropTypes.func.isRequired,
+  set_post: PropTypes.func.isRequired,
+  delete_post: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

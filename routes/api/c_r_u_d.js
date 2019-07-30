@@ -42,19 +42,17 @@ router.post('/post', (req, res, next) => {
 });
 
 // Delete 1 post
-router.post('/patch-post', (req, res, next) => {
+router.post('/delete-post', (req, res, next) => {
   const { id, account_id } = req.body;
-  console.log(id, 'id');
-  console.log(account_id, 'account_id');
 
-  // AccountTable.get_account_by_id({ id: account_id })
-  //   .then(({ success }) => {
-  //     if(!success) return res.status(404).json({ message: success });
-  //     TextTable.delete_post({ id })
-  //       .then(({ success }) => res.json({ success }))
-  //       .catch(e => next(e))
-  //   })
-  //   .catch(e => next(e));
+  AccountTable.get_account_by_id({ id: account_id })
+    .then(({ success }) => {
+      if(!success) return res.status(404).json({ message: success });
+      TextTable.delete_post({ id })
+        .then(({ success }) => res.json({ success }))
+        .catch(e => next(e))
+    })
+    .catch(e => next(e));
 });
 
 module.exports = router;

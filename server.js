@@ -19,7 +19,8 @@ app.use(passport.initialize());
 
 
 // Routes
-app.use('/account',account, c_r_u_d);
+app.use('/account',account);
+app.use('/account/dashboard', c_r_u_d);
 
 // Error handling
 app.use((error, req, res, next) => {
