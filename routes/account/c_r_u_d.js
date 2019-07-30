@@ -8,9 +8,9 @@ class TextTable {
       pool.query(
         'INSERT INTO posts(account_id, post) VALUES($1, $2)',
         [id, post],
-        (e, response) => {
-          if(e) return reject(e);
-          resolve({ message: true })
+        (error, response) => {
+          if(error) return reject(error);
+          resolve({ message: true });
         }
       )
     });
@@ -39,11 +39,25 @@ class TextTable {
         [id],
         (error, response) => {
           if(error) return reject(error);
-          resolve({ success: true })
+          resolve({ success: true });
         }
       )
-    })
-  }
+    });
+  };
+
+  // Delete All
+  static delete_all_posts({ id }) {
+    return new Promise((resolve, reject) => {
+      pool.query(
+        'DELETE FROM posts WHERE account_id=$1',
+        [id],
+        (error, response) => {
+          if(error) return reject(error);
+          resolve({ success: true });
+        }
+      )
+    });
+  };
 
 }
 

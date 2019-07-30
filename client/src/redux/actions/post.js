@@ -40,3 +40,16 @@ export const delete_post = data => dispatch => {
       payload: e.response.data
     }));
 };
+
+export const delete_all_posts = id => dispatch => {
+  axios
+    .post(`${URL.post}/delete-all-posts`, id)
+    .then(success => dispatch({
+      type: POST.DELETE_ALL_POSTS,
+      payload: ''
+    }))
+    .catch(e => dispatch({
+      type: ERRORS.ERROR,
+      payload: e.response.data
+    }));
+};

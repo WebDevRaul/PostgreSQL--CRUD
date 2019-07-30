@@ -55,4 +55,17 @@ router.post('/delete-post', (req, res, next) => {
     .catch(e => next(e));
 });
 
+// Delete all posts
+router.post('/delete-all-posts', (req, res, next) => {
+  const { id } = req.body;
+  AccountTable.get_account_by_id({ id })
+    .then(({ success }) => {
+      if(!success) return res.status(404).json({ message: success });
+      TextTable.delete_all_posts({ id })
+        .then(({ success }) => res.json({ success }))
+        .catch(e => next(e));
+    })
+    .catch(e => next(e));
+});
+
 module.exports = router;

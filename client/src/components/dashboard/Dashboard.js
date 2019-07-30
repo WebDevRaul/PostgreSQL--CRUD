@@ -7,7 +7,7 @@ import Crud from './Crud';
 
 // Redux
 import { connect } from 'react-redux';
-import { add_post, set_post, delete_post } from '../../redux/actions/post';
+import { add_post, set_post, delete_post, delete_all_posts } from '../../redux/actions/post';
 
 
 // Css
@@ -45,6 +45,12 @@ class Dashboard extends Component {
     const data = { id, account_id }
     this.props.delete_post(data)
   }
+
+  onDeleteAll = e => {
+    e.preventDefault();
+    const { id } = this.props.account.account.user;
+    this.props.delete_all_posts({ id })
+  };
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value })
@@ -89,8 +95,14 @@ class Dashboard extends Component {
                       error={errors}
                     />
                   </div>
-                  <div className='col-3 m-auto pt-3'>
-                    <button className='btn btn-primary float-right'>Add</button>
+                  <div className='col-3 m-auto pt-3 d-flex'>
+                    <button className='btn ml-2 mr-2 btn-primary float-right'>Add</button>
+                    <span>
+                      <button 
+                        className='btn btn-danger float-right'
+                        onClick={this.onDeleteAll}
+                      >Clear</button>
+                    </span>
                   </div>
                 </div>
               </form>
@@ -116,4 +128,4 @@ const mapStateToProps = state => ({
   posts: state.posts
 });
 
-export default connect( mapStateToProps, { add_post, set_post, delete_post } )(Dashboard);
+export default connect( mapStateToProps, { add_post, set_post, delete_post, delete_all_posts } )(Dashboard);
