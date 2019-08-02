@@ -8,7 +8,11 @@ import Crud from './Crud';
 // Redux
 import { connect } from 'react-redux';
 import { add_post, set_post, delete_post, delete_all_posts, update_post } from '../../redux/actions/post';
+import { set_error, clear_error } from '../../redux/actions/common';
 
+// Validation
+import validateDashboardInput from '../../validation/dashboard';
+import isEmpty from '../../validation/isEmpty';
 
 // Css
 import '../../css/dashboard.css';
@@ -27,7 +31,17 @@ class Dashboard extends Component {
     // Fetch the posts
     const { id } = this.props.account.account.user;
     this.props.set_post(({id}));
-  }
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    const { post } = this.props.errors.errors;
+    // Update Error state from props
+    if ((post !== prevState.errors.post) && !isEmpty(post)) {
+      this.setState({ errors: { post } });
+      this.props.clear_error();
+    };
+  };
+  
 
   onSubmit = e => {
     e.preventDefault();
@@ -37,11 +51,21 @@ class Dashboard extends Component {
       // id: PropTypes.string.isRequired, in CRUD component
       exp: String(this.state.exp)
     };
-    // Add post
-    this.props.add_post(data);
-    // reset post state;
-    this.setState({ add_post: '', exp: this.state.exp+1 });
+    // Validate Post
+    const { errors, isValid } = validateDashboardInput({ post: this.state.add_post });
+    if(!isValid) { this.props.set_error(errors) }
+    else { 
+      // Add post
+      this.props.add_post(data);
+      // Clear post state;
+      this.setState({ add_post: '', exp: this.state.exp+1 });
+     }
+  }
 
+  onFocus = e => {
+    // Clear Error on Focus
+    const { errors } = this.state;
+    if(!isEmpty(errors)) return this.setState({ errors: { post: '' } });
   }
 
   onDelete = id => {
@@ -101,18 +125,19 @@ class Dashboard extends Component {
             <div className='col'>
               <form onSubmit={this.onSubmit} >
                 <div className='row no-gutters'>
-                  <div className='col-9'>
+                  <div className='col-8 pl-2'>
                     <LabelInput 
                       text='Text'
                       type='text'
                       icon='far fa-plus-square'
                       name='add_post'
                       onChange={this.onChange}
+                      onFocus={this.onFocus}
                       value={add_post}
-                      error={errors}
+                      error={errors.post}
                     />
                   </div>
-                  <div className='col-3 m-auto pt-3 d-flex'>
+                  <div className='col-4 m-auto pt-3 d-flex'>
                     <button className='btn ml-2 mr-2 btn-primary float-right'>Add</button>
                     <span>
                       <button 
@@ -135,15 +160,20 @@ class Dashboard extends Component {
 Dashboard.propTypes = {
   account: PropTypes.object.isRequired,
   posts: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
   add_post: PropTypes.func.isRequired,
   set_post: PropTypes.func.isRequired,
-  delete_post: PropTypes.func.isRequired
+  delete_post: PropTypes.func.isRequired,
+  update_post: PropTypes.func.isRequired,
+  set_error: PropTypes.func.isRequired,
+  clear_error: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   account: state.account,
-  posts: state.posts
+  posts: state.posts,
+  errors: state.errors
 });
 
 export default connect( mapStateToProps, 
-  { add_post, set_post, delete_post, delete_all_posts, update_post } )(Dashboard);
+  { add_post, set_post, delete_post, delete_all_posts, update_post, set_error, clear_error } )(Dashboard);

@@ -10,7 +10,13 @@ const errors = (state=initialState, action) => {
       return {
         ...state,
         errors: action.payload
+      }    
+    case ERRORS.CLEAR_ERROR:
+      return {
+        ...state,
+        errors: {}
       }
+
     case ERRORS.CLEAR_EMAIL_BACKEND:
       return {
         ...state,
