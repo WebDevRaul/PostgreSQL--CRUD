@@ -11,10 +11,15 @@ const posts = (state=initialState, action) => {
         ...state,
         posts: action.payload
       }
+    case POST.EXP_ADD_POST:
+      return {
+        ...state,
+        posts: [...state.posts, { post: action.payload.post, id: action.payload.exp }]
+      }
     case POST.ADD_POST:
       return {
         ...state,
-        posts: action.payload
+        posts: [...state.posts.filter(item => item.id !== action.payload.exp), action.payload]
       }
     case POST.DELETE_ONE_POST:
       return {

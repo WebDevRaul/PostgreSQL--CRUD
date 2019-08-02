@@ -6,11 +6,11 @@ class TextTable {
   static create_post({ id, post }) {
     return new Promise((resolve, reject) => {
       pool.query(
-        'INSERT INTO posts(account_id, post) VALUES($1, $2)',
+        'INSERT INTO posts(account_id, post) VALUES($1, $2) RETURNING post, id',
         [id, post],
         (error, response) => {
           if(error) return reject(error);
-          resolve({ message: true });
+          resolve({ post: response.rows[0] });
         }
       )
     });

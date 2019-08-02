@@ -18,6 +18,7 @@ class Dashboard extends Component {
     super();
     this.state = {
       add_post: '',
+      exp: '1',
       errors: ''
     }
   }
@@ -32,12 +33,15 @@ class Dashboard extends Component {
     e.preventDefault();
     const data = {
       id: this.props.account.account.user.id,
-      post: this.state.add_post
+      post: this.state.add_post,
+      // id: PropTypes.string.isRequired, in CRUD component
+      exp: String(this.state.exp)
     };
     // Add post
     this.props.add_post(data);
     // reset post state;
-    this.setState({ add_post: '' })
+    this.setState({ add_post: '' });
+
   }
 
   onDelete = id => {

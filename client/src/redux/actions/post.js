@@ -16,12 +16,17 @@ export const set_post = id => dispatch => {
 };
 
 export const add_post = data => dispatch => {
+    // Expected Promise
+    dispatch({ type: POST.EXP_ADD_POST, payload: data });
   axios
     .post(`${URL.post}/add-post`, data)
-    .then(res => dispatch({
-      type: POST.ADD_POST,
-      payload: res.data.post
-    }))
+    .then(res => {
+      res.data.post.exp = data.exp;
+      dispatch({
+        type: POST.ADD_POST,
+        payload: res.data.post
+      });
+    })
     .catch(e => dispatch({
       type: ERRORS.ERROR,
       payload: e.response.data
