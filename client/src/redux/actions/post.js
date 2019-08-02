@@ -33,6 +33,22 @@ export const add_post = data => dispatch => {
     }));
 };
 
+export const update_post = data => dispatch => {
+  // Expected promise
+  const exp_data = { post: data.post, id: data.id };
+  dispatch({ type: POST.EXP_UPDATE_POST, payload: exp_data });
+  axios
+    .put(`${URL.post}/update-post`, data)
+    .then(res => dispatch({
+      type: POST.UPDATE_POST,
+      payload: res.data.post
+    }))
+    .catch(e => dispatch({
+      type: ERRORS.ERROR,
+      payload: e.response.data
+    }))
+}
+
 export const delete_post = data => dispatch => {
   // Expected Promise
   dispatch({ type: POST.EXP_DELETE_ONE_POST, payload: data.id });
@@ -62,16 +78,3 @@ export const delete_all_posts = id => dispatch => {
       payload: e.response.data
     }));
 };
-
-export const update_post = data => dispatch => {
-  axios
-    .put(`${URL.post}/update-post`, data)
-    .then(res => dispatch({
-      type: POST.UPDATE_POST,
-      payload: res.data.post
-    }))
-    .catch(e => dispatch({
-      type: ERRORS.ERROR,
-      payload: e.response.data
-    }))
-}

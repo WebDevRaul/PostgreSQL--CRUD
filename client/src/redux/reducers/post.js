@@ -26,6 +26,11 @@ const posts = (state=initialState, action) => {
           { post: action.payload.post, id: action.payload.id }
         ]
       }
+    case POST.EXP_UPDATE_POST:
+      return {
+        ...state,
+        posts: [...state.posts.filter(item => item.id !== action.payload.id), action.payload]
+      }
     case POST.UPDATE_POST:
         return {
           ...state,
