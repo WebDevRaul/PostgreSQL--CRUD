@@ -65,9 +65,15 @@ class Dashboard extends Component {
     this.setState({ [e.target.name]: e.target.value })
   }
 
+  // Sort the posts so they dont move @
+  onSort = data => {
+    data.sort((a, b) => a.position - b.position);
+  }
+
   render() {
     const { add_post, errors } = this.state;
     const { posts } = this.props.posts;
+    this.onSort(posts);
 
     const crud_posts = posts.map(({ post, id }) => 
         <Crud
