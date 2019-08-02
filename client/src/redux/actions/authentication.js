@@ -1,4 +1,4 @@
-import { ERRORS, ACCOUNT } from './types';
+import { ERRORS, ACCOUNT, POST } from './types';
 import URL from '../../backend/URL';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
@@ -44,6 +44,13 @@ export const setCurrentUser = decoded => {
   };
 };
 
+export const setClearPosts = () => {
+  return {
+    type: POST.DELETE_ALL_POSTS,
+    payload: ''
+  }
+}
+
 export const sign_out = () => dispatch => {
   // Remove token from localStorage
   localStorage.removeItem('jwtToken');
@@ -51,4 +58,6 @@ export const sign_out = () => dispatch => {
   setAuthToken(false);
   // Set current user to {} which will set isAuthenticated to false
   dispatch(setCurrentUser({}));
+  // Clear posts
+  dispatch(setClearPosts());
 };
