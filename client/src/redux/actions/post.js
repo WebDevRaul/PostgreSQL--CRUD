@@ -53,3 +53,16 @@ export const delete_all_posts = id => dispatch => {
       payload: e.response.data
     }));
 };
+
+export const update_post = data => dispatch => {
+  axios
+    .put(`${URL.post}/update-post`, data)
+    .then(res => dispatch({
+      type: POST.UPDATE_POST,
+      payload: res.data.post
+    }))
+    .catch(e => dispatch({
+      type: ERRORS.ERROR,
+      payload: e.response.data
+    }))
+}

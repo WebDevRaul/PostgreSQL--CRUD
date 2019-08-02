@@ -59,6 +59,20 @@ class TextTable {
     });
   };
 
+  static update_post({ id, post }) {
+    console.log('updated')
+    return new Promise((resolve, reject) => {
+      pool.query(
+        'UPDATE posts SET post=$2 WHERE id=$1',
+        [id, post],
+        (error, response) => {
+          if(error) return reject(error);
+          resolve({ success: true })
+        }
+      );
+    });
+  };
+
 }
 
 module.exports = TextTable;

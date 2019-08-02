@@ -26,6 +26,11 @@ const posts = (state=initialState, action) => {
         ...state,
         posts: []
       }
+    case POST.UPDATE_POST:
+      return {
+        ...state,
+        posts: action.payload
+      }
     default:
       return state; 
   };

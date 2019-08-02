@@ -16,6 +16,17 @@ class Crud extends Component {
     this.setState({ post: this.props.post })
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    const { edit, post } = this.state;
+    const { id } = this.props;
+    if (!edit && (post !== prevProps.post) && (prevState.edit === true)) {
+      const data = { id, post }
+      // redirect to dashbboard
+      this.props.onUpdate(data);
+    }
+  }
+  
+
   onEdit = () => {
     this.setState({ edit: !this.state.edit })
   }
@@ -71,7 +82,8 @@ class Crud extends Component {
   Crud.propTypes = {
     id: PropTypes.string.isRequired,
     post: PropTypes.string.isRequired,
-    onDelete: PropTypes.func.isRequired
+    onDelete: PropTypes.func.isRequired,
+    onUpdate: PropTypes.func.isRequired
   };
   
   export default Crud;

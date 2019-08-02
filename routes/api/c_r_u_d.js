@@ -68,4 +68,23 @@ router.post('/delete-all-posts', (req, res, next) => {
     .catch(e => next(e));
 });
 
+// Update post
+router.put('/update-post', (req, res, next) => {
+  const { id, post, account_id } = req.body;
+  AccountTable.get_account_by_id({ id: account_id })
+    .then(({ success }) => {
+      if(!success) return res.status(404).json({ message: success });
+      TextTable.update_post({ id, post })
+      .then(({ success }) => {
+        if(!success) return res.status(404).json({ message: success });
+        // response with success and update in reducer or fetch all posts
+        TextTable.recover_post({ id: account_id })
+          .then(({ post }) => res.json({ post }))
+          .catch(e => next(e));
+        })
+        .catch(e => next(e));
+    })
+    .catch(e => next(e));
+});
+
 module.exports = router;
