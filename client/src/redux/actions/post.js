@@ -66,12 +66,12 @@ export const delete_post = data => dispatch => {
 
 export const delete_all_posts = id => dispatch => {
   // Expected promise
-  dispatch({ type: POST.EXP_DELETE_ONE_POST, payload: ''})
+  dispatch({ type: POST.EXP_DELETE_ALL_POSTS, payload: [] });
   axios
     .post(`${URL.post}/delete-all-posts`, id)
     .then(success => dispatch({
       type: POST.DELETE_ALL_POSTS,
-      payload: ''
+      payload: []
     }))
     .catch(e => dispatch({
       type: ERRORS.ERROR,

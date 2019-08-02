@@ -54,12 +54,12 @@ const posts = (state=initialState, action) => {
     case POST.EXP_DELETE_ALL_POSTS:
       return {
         ...state,
-        posts: []
+        posts: action.payload
       }
     case POST.DELETE_ALL_POSTS:
       return {
         ...state,
-        posts: []
+        posts: action.payload
       }
     default:
       return state; 

@@ -47,7 +47,7 @@ export const setCurrentUser = decoded => {
 export const setClearPosts = () => {
   return {
     type: POST.DELETE_ALL_POSTS,
-    payload: ''
+    payload: []
   }
 }
 

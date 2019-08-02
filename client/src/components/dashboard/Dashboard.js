@@ -73,7 +73,8 @@ class Dashboard extends Component {
   render() {
     const { add_post, errors } = this.state;
     const { posts } = this.props.posts;
-    this.onSort(posts);
+    // Sorts posts
+    if(posts.length > 2) return this.onSort(posts);
 
     const crud_posts = posts.map(({ post, id }) => 
         <Crud
