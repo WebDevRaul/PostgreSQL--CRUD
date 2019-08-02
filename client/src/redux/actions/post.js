@@ -34,6 +34,8 @@ export const add_post = data => dispatch => {
 };
 
 export const delete_post = data => dispatch => {
+  // Expected Promise
+  dispatch({ type: POST.EXP_DELETE_ONE_POST, payload: data.id });
   axios
     .post(`${URL.post}/delete-post`, data)
     .then(success => dispatch({
@@ -47,6 +49,8 @@ export const delete_post = data => dispatch => {
 };
 
 export const delete_all_posts = id => dispatch => {
+  // Expected promise
+  dispatch({ type: POST.EXP_DELETE_ONE_POST, payload: ''})
   axios
     .post(`${URL.post}/delete-all-posts`, id)
     .then(success => dispatch({
