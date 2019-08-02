@@ -63,11 +63,11 @@ class TextTable {
     console.log('updated')
     return new Promise((resolve, reject) => {
       pool.query(
-        'UPDATE posts SET post=$2 WHERE id=$1',
+        'UPDATE posts SET post=$2 WHERE id=$1 RETURNING post, id',
         [id, post],
         (error, response) => {
           if(error) return reject(error);
-          resolve({ success: true })
+          resolve({ post: response.rows[0] })
         }
       );
     });

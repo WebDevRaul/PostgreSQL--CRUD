@@ -29,7 +29,7 @@ const posts = (state=initialState, action) => {
     case POST.UPDATE_POST:
       return {
         ...state,
-        posts: action.payload
+        posts: [...state.posts.filter(item => item.id !== action.payload.id), action.payload]
       }
     default:
       return state; 
