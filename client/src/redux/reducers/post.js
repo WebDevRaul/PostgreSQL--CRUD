@@ -19,7 +19,12 @@ const posts = (state=initialState, action) => {
     case POST.ADD_POST:
       return {
         ...state,
-        posts: [...state.posts.filter(item => item.id !== action.payload.exp), action.payload]
+        posts: [
+          // remove old post
+          ...state.posts.filter(item => item.id !== action.payload.exp), 
+          // add new post w/o the exp data
+          { post: action.payload.post, id: action.payload.id }
+        ]
       }
     case POST.DELETE_ONE_POST:
       return {

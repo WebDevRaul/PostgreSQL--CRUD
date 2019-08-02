@@ -18,7 +18,7 @@ class Dashboard extends Component {
     super();
     this.state = {
       add_post: '',
-      exp: '1',
+      exp: 1,
       errors: ''
     }
   }
@@ -40,7 +40,7 @@ class Dashboard extends Component {
     // Add post
     this.props.add_post(data);
     // reset post state;
-    this.setState({ add_post: '' });
+    this.setState({ add_post: '', exp: this.state.exp+1 });
 
   }
 
