@@ -115,7 +115,7 @@ class Dashboard extends Component {
     return (
       <div className='dashboard'>
         <div className='row no-gutters d-flex'>
-          <div className='col col-sm-6 m-auto'>
+          <div className='col col-sm-8 m-auto'>
             <Title />
             <Form
               onSubmit={this.onSubmit}
