@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
 
 // Components
 import Title from './Title';
@@ -100,9 +99,9 @@ class Dashboard extends Component {
     const { add_post, errors } = this.state;
     const { posts } = this.props.posts;
     // Sorts posts
-    if(posts.length > 2) return this.onSort(posts);
+    // if(posts.length > 2) return this.onSort(posts);
 
-    const crud_posts = posts.map(({ post, id }) => 
+    const CRUD_component = posts.map(({ post, id }) => 
         <Crud
           key={id}
           post={post}
@@ -125,6 +124,7 @@ class Dashboard extends Component {
               post={errors.post}
               onDeleteAll={this.onDeleteAll}
             />
+            { CRUD_component }
           </div>
         </div>
       </div>

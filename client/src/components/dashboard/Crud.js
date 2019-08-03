@@ -46,37 +46,37 @@ class Crud extends Component {
     const { id } = this.props;
     const { edit, post, error } = this.state;
     return (
-      <div className='crud'>
-        <div className='row no-gutters'>
-          <div className='col-8'>
-            <div className='form-group mb-0'>
-              <div className='input-group'>
-                <input
-                  type='text'
-                  className={classnames('form-control form-control-lg', {'is-invalid' : error})}
-                  value={post}
-                  onChange={this.onChange}
-                  disabled={edit ? false : true}
-                />
-                {error && <div className='invalid-feedback'>{error}</div>}
+      <div className='dashboard-crud'>
+        <div className='row no-gutters mb-2'>
+          <div className='col col-md-10 col-lg-6 m-auto'>
+            <div className='row no-gutters'>
+              <div className='col-8 col-sm-8 col-lg-8 dashbord-form-input pr-2'>
+                <div className='input-group'>
+                  <input
+                    type='text'
+                    className={classnames('form-control form-control-lg', {'is-invalid' : error})}
+                    value={post}
+                    onChange={this.onChange}
+                    disabled={edit ? false : true}
+                  />
+                  {error && <div className='invalid-feedback'>{error}</div>}
+                </div>
+              </div>
+              <div className='col-4 col-sm-4 col-lg-4'>
+                <div className='row no-gutters dashboard-form-btn'>
+                  <div className='col-6 btn-add d-flex'>
+                    <button className='btn btn-primary d-flex m-auto' onClick={this.onEdit}>
+                      <i className={!edit ? 'fas fa-pen' : 'fas fa-check'}></i>
+                    </button>
+                  </div>
+                  <div className='col-6 btn-clear d-flex'>
+                    <button className='btn btn-danger m-auto d-flex' onClick={this.onDelete(id)}>
+                      <i className='far fa-times-circle m-auto'></i>
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          <div className='col-3 m-auto d-flex'>
-            <button
-              className='btn btn-primary crud-edit ml-2 mr-2'
-              onClick={this.onEdit}
-            >
-              <i className={!edit ? 'fas fa-pen' : 'fas fa-check'}></i>
-            </button>
-            <span>
-              <button 
-                className='btn btn-primary crud-delete float-right'
-                onClick={this.onDelete(id)}
-              >
-                <i className='far fa-times-circle'></i>
-              </button>
-            </span>
           </div>
         </div>
       </div>
