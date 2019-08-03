@@ -112,47 +112,57 @@ class Dashboard extends Component {
       );
 
     return (
-      <div className='dashboard container pt-5'>
-        <div className='p-5'>
-          <div className='row no-gutters mb-5'>
-            <div className='col m-auto'>
-              <div className='dashboard-title text-center'>
-                <h1 className='text-primary'>CRUD</h1>
-                <p>Create - Read - Update - Delete</p>
+      <div className='dashboard'>
+        <div className='row no-gutters d-flex'>
+          <div className='col-6 m-auto'>
+            <div className='row no-gutters mb-5 bg-white'>
+              <div className='col-8 m-auto'>
+                <div className='dashboard-title m-auto text-center'>
+                  <h1 className='text-primary'>CRUD</h1>
+                  <p>Create - Read - Update - Delete</p>
+                </div>
               </div>
             </div>
-          </div>
-          <div className='row no-gutters'>
-            <div className='col m-auto'>
-              <form onSubmit={this.onSubmit} >
+            <div className='row d-flex no-gutters mb-5 bg-white'>
+              <div className='col-8 m-auto'>
                 <div className='row no-gutters'>
                   <div className='col'>
-                    <LabelInput 
-                      text='Text'
-                      type='text'
-                      icon='far fa-plus-square'
-                      name='add_post'
-                      onChange={this.onChange}
-                      onFocus={this.onFocus}
-                      value={add_post}
-                      error={errors.post}
-                    />
-                  </div>
-                  <div className={
-                    classnames('col-3 m-auto d-flex', 
-                    { 'pt-3': !errors.post, 'mb-1rem': errors.post })
-                  }>
-                    <button className='btn ml-2 mr-2 btn-primary float-right'>Add</button>
-                    <span>
-                      <button 
-                        className='btn btn-danger float-right'
-                        onClick={this.onDeleteAll}
-                      >Clear</button>
-                    </span>
+                    <form onSubmit={this.onSubmit}>
+                      <div className='row no-gutters'>
+                        <div className='col-8'>
+                          <LabelInput 
+                            text='Text'
+                            type='text'
+                            icon='far fa-plus-square'
+                            name='add_post'
+                            onChange={this.onChange}
+                            onFocus={this.onFocus}
+                            value={add_post}
+                            error={errors.post}
+                          />
+                        </div>
+                        <div className={
+                          classnames('col-3 m-auto d-flex', 
+                          { 'pt-3': !errors.post, 'mb-1rem': errors.post })
+                        }>
+                          <button className='btn ml-2 mr-2 btn-primary float-right'>Add</button>
+                          <span>
+                            <button 
+                              className='btn btn-danger float-right'
+                              onClick={this.onDeleteAll}
+                            >Clear</button>
+                          </span>
+                        </div>
+                      </div>
+                    </form>
                   </div>
                 </div>
-              </form>
-              {crud_posts}
+                <div className='row no-gutters'>
+                  <div className='col m-auto'>
+                    { crud_posts }
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
