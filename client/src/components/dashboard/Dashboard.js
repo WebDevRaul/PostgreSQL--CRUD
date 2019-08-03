@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 
 // Components
 import LabelInput from '../common/components/Label_Input';
@@ -111,10 +112,10 @@ class Dashboard extends Component {
       );
 
     return (
-      <div className='dashboard d-flex pl-3 pr-3'>
-        <div className='m-auto'>
+      <div className='dashboard container pt-5'>
+        <div className='p-5'>
           <div className='row no-gutters mb-5'>
-            <div className='col'>
+            <div className='col m-auto'>
               <div className='dashboard-title text-center'>
                 <h1 className='text-primary'>CRUD</h1>
                 <p>Create - Read - Update - Delete</p>
@@ -122,10 +123,10 @@ class Dashboard extends Component {
             </div>
           </div>
           <div className='row no-gutters'>
-            <div className='col'>
+            <div className='col m-auto'>
               <form onSubmit={this.onSubmit} >
                 <div className='row no-gutters'>
-                  <div className='col-8 pl-2'>
+                  <div className='col'>
                     <LabelInput 
                       text='Text'
                       type='text'
@@ -137,7 +138,10 @@ class Dashboard extends Component {
                       error={errors.post}
                     />
                   </div>
-                  <div className='col-4 m-auto pt-3 d-flex'>
+                  <div className={
+                    classnames('col-3 m-auto d-flex', 
+                    { 'pt-3': !errors.post, 'mb-1rem': errors.post })
+                  }>
                     <button className='btn ml-2 mr-2 btn-primary float-right'>Add</button>
                     <span>
                       <button 
@@ -164,6 +168,7 @@ Dashboard.propTypes = {
   add_post: PropTypes.func.isRequired,
   set_post: PropTypes.func.isRequired,
   delete_post: PropTypes.func.isRequired,
+  delete_all_posts: PropTypes.func.isRequired,
   update_post: PropTypes.func.isRequired,
   set_error: PropTypes.func.isRequired,
   clear_error: PropTypes.func.isRequired

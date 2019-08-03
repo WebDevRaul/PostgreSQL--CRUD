@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
+// Css
+import '../../css/crud.css'
+
 class Crud extends Component {
   constructor() {
     super();
@@ -43,9 +46,9 @@ class Crud extends Component {
     const { id } = this.props;
     const { edit, post, error } = this.state;
     return (
-      <div className='row no-gutters mb-3'>
-        <div className='col-9'>
-          <div className='dashboard-user'>
+      <div className='crud'>
+        <div className='row no-gutters mb-3'>
+          <div className='col-9'>
             <div className='form-group mb-0'>
               <div className='input-group'>
                 <input
@@ -59,20 +62,24 @@ class Crud extends Component {
               </div>
             </div>
           </div>
-        </div>
-        <div className='col-3 m-auto d-flex'>
-          <span 
-            className='m-auto dashbord-edit'
-            onClick={this.onEdit}
-            >
-              <i className={!edit ? 'fas fa-pen' : 'fas fa-check'}></i>
-          </span> 
-          <span 
-            className='dashboard-delete float-right'
-            onClick={this.onDelete(id)}
-            >
-            <button className='btn btn-primary'><i className='far fa-times-circle'></i></button>
-          </span>
+          <div className='col-3 m-auto d-flex'>
+            <span 
+              className='d-flex crud-edit'
+              onClick={this.onEdit}
+              >
+                <div className='m-auto'>
+                  <button className='btn btn-primary ml-2 mr-2'>
+                    <i className={!edit ? 'fas fa-pen' : 'fas fa-check'}></i>
+                  </button>
+                </div>
+            </span> 
+            <span 
+              className='crud-delete float-right'
+              onClick={this.onDelete(id)}
+              >
+              <button className='btn btn-primary'><i className='far fa-times-circle'></i></button>
+            </span>
+          </div>
         </div>
       </div>
     );
