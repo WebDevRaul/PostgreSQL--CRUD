@@ -64,14 +64,14 @@ class Crud extends Component {
           </div>
           <div className='col-3 m-auto d-flex'>
             <button
-              className='btn btn-primary ml-2 mr-2'
+              className='btn btn-primary crud-edit ml-2 mr-2'
               onClick={this.onEdit}
             >
               <i className={!edit ? 'fas fa-pen' : 'fas fa-check'}></i>
             </button>
             <span>
               <button 
-                className='btn btn-danger float-right'
+                className='btn btn-primary crud-delete float-right'
                 onClick={this.onDelete(id)}
               >
                 <i className='far fa-times-circle'></i>

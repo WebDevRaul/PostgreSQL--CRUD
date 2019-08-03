@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 // Components
-import LabelInput from '../common/components/Label_Input';
+import Title from './Title';
+import Form from './Form';
 import Crud from './Crud';
 
 // Redux
@@ -114,56 +115,16 @@ class Dashboard extends Component {
     return (
       <div className='dashboard'>
         <div className='row no-gutters d-flex'>
-          <div className='col-6 m-auto'>
-            <div className='row no-gutters mb-5 bg-white'>
-              <div className='col-8 m-auto'>
-                <div className='dashboard-title m-auto text-center'>
-                  <h1 className='text-primary'>CRUD</h1>
-                  <p>Create - Read - Update - Delete</p>
-                </div>
-              </div>
-            </div>
-            <div className='row d-flex no-gutters mb-5 bg-white'>
-              <div className='col-8 m-auto'>
-                <div className='row no-gutters'>
-                  <div className='col'>
-                    <form onSubmit={this.onSubmit}>
-                      <div className='row no-gutters'>
-                        <div className='col-8'>
-                          <LabelInput 
-                            text='Text'
-                            type='text'
-                            icon='far fa-plus-square'
-                            name='add_post'
-                            onChange={this.onChange}
-                            onFocus={this.onFocus}
-                            value={add_post}
-                            error={errors.post}
-                          />
-                        </div>
-                        <div className={
-                          classnames('col-3 m-auto d-flex', 
-                          { 'pt-3': !errors.post, 'mb-1rem': errors.post })
-                        }>
-                          <button className='btn ml-2 mr-2 btn-primary float-right'>Add</button>
-                          <span>
-                            <button 
-                              className='btn btn-danger float-right'
-                              onClick={this.onDeleteAll}
-                            >Clear</button>
-                          </span>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-                <div className='row no-gutters'>
-                  <div className='col m-auto'>
-                    { crud_posts }
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div className='col col-sm-6 m-auto'>
+            <Title />
+            <Form
+              onSubmit={this.onSubmit}
+              onChange={this.onChange}
+              onFocus={this.onFocus}
+              add_post={add_post}
+              post={errors.post}
+              onDeleteAll={this.onDeleteAll}
+            />
           </div>
         </div>
       </div>
