@@ -7,10 +7,10 @@ import LabelInput from '../common/components/Label_Input';
 const Form = ({ onSubmit, onChange, onFocus, add_post, post, onDeleteAll }) => {
   return(
     <div className='row no-gutters mb-5 bg-white'>
-      <div className='col col-sm-8 m-auto'>
+      <div className='col col-md-8 m-auto bg-white'>
         <form onSubmit={onSubmit}>
           <div className='row no-gutters'>
-            <div className='col-6 col-sm-8'>
+            <div className='col-6 dashbord-form-input'>
               <LabelInput 
                 text='Text'
                 type='text'
@@ -22,15 +22,17 @@ const Form = ({ onSubmit, onChange, onFocus, add_post, post, onDeleteAll }) => {
                 error={post}
               />
             </div>
-            <div className='col-6' >
-              <div className='row no-gutters'>
-                <div className='col-6'>
-                  <button className='btn ml-2 mr-2 btn-primary float-right'>Add</button>
+            <div className='col-5 pl-2'>
+              <div className='row no-gutters dashboard-form-btn'>
+                <div className='col-6 btn-add d-flex'>
+                  <button className='btn btn-primary d-flex m-auto'>
+                    <i className="fas fa-plus-circle m-auto"></i>
+                  </button>
                 </div>
-                <div className='col-6'>
-                <button className='btn btn-danger float-right'onClick={onDeleteAll}>
-                  Clear
-                </button>
+                <div className='col-6 btn-clear d-flex'>
+                  <button className='btn btn-danger m-auto d-flex'onClick={onDeleteAll}>
+                    <i className='far fa-times-circle m-auto'></i>
+                  </button>
                 </div>
               </div>
             </div>

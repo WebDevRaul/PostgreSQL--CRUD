@@ -1,6 +1,24 @@
 .dashboard {
   min-height: 83.2vh;
 }
+.dashbord-form-input label {
+  display: none;
+}
+.dashbord-form-input .form-group{
+  margin-bottom: 0px;
+}
+.dashboard-form-btn {
+  padding-top: 5px;
+}
+.dashboard-form-btn .btn-clear i,
+.dashboard-form-btn .btn-add i {
+  padding: 4px 3px;
+}
+
+
+
+
+
 .mb-1rem {
   padding-bottom: 1rem;
 }
