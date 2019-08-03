@@ -1,5 +1,48 @@
-/* @media (max-width: 991px) {
-  .home, .sign-in, .not-found, .dashboard{
-    min-height: 84.5vh !important;
+@media (min-width : 320px) and (max-width : 420px) {
+  /* DASHBOARD */
+  .dashboard-title h1{
+    font-size: 3em;
   }
-} */
+  .dashboard-title p {
+    font-size: 1em;
+  }
+}
+
+@media (min-width : 420px) and (max-width : 480px) {
+
+}
+
+@media (min-width: 481px) and (max-width: 575px) {
+
+}
+
+@media (min-width: 576px) and (max-width: 767px) { 
+    /* DASHBOARD */
+    .dashboard-title h1{
+      font-size: 4em;
+    }
+    .dashboard-title p {
+      font-size: 1.025em;
+    }
+}
+
+@media (min-width : 768px) and (max-width : 1024px) {
+  /* DASHBOARD */
+  .dashboard-title {
+    padding-right: 10px;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+  /* DASHBOARD */
+  .dashboard-title {
+    padding-right: 4px;
+  }
+}
+
+@media (min-width: 1281px) {
+  /* DASHBOARD */
+  .dashboard-title {
+    padding-right: 14px;
+  }
+}

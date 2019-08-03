@@ -1,5 +1,5 @@
 .dashboard {
-  min-height: 83.2vh;
+  min-height: 84.2vh;
 }
 .dashbord-form-input label {
   display: none;
@@ -15,18 +15,11 @@
   padding: 4px 3px;
 }
 
-
-
-
-
-.mb-1rem {
-  padding-bottom: 1rem;
-}
 .dashboard-title h1{
-  font-size: 5rem;
+  font-size: 5em;
 }
 .dashboard-title p {
   border-bottom: 1px solid black;
-  font-size: 1.2rem;
+  font-size: 1.2em;
   padding-bottom: 5px;
 }
