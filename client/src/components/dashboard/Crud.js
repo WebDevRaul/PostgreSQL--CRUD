@@ -65,15 +65,15 @@ class Crud extends Component {
               <div className='col-4 col-sm-3 col-lg-4 m-auto'>
                 <div className='d-flex float-right pr-2'>
                   <div className='btn-edit d-flex pr-2'>
-                      <button className='btn btn-primary d-flex m-auto' onClick={this.onEdit}>
-                        <i className={!edit ? 'fas fa-pen' : 'fas fa-check'}></i>
-                      </button>
-                    </div>
-                    <div className='btn-delete d-flex'>
-                      <button className='btn btn-danger m-auto d-flex' onClick={this.onDelete(id)}>
-                        <i className='far fa-times-circle m-auto'></i>
-                      </button>
-                    </div>
+                    <button className='btn btn-primary d-flex m-auto' onClick={this.onEdit}>
+                      <i className={!edit ? 'fas fa-pen' : 'fas fa-check'}></i>
+                    </button>
+                  </div>
+                  <div className='btn-delete d-flex'>
+                    <button className='btn btn-primary m-auto d-flex' onClick={this.onDelete(id)}>
+                      <i className='far fa-times-circle'></i>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

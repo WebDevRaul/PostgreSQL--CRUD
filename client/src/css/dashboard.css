@@ -23,3 +23,8 @@
   font-size: 1.2em;
   padding-bottom: 5px;
 }
+
+/* Form */
+.btn-add i, .btn-clear i {
+  padding: 1px 2px;
+}

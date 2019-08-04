@@ -13,36 +13,51 @@
 }
 
 @media (min-width: 481px) and (max-width: 575px) {
-
+  /* DASHBOARD */
+  .btn-edit i, .btn-delete i, .btn-add i, .btn-clear i {
+    padding: 3px 4px;
+  }
 }
 
 @media (min-width: 576px) and (max-width: 767px) { 
-    /* DASHBOARD */
-    .dashboard-title h1{
-      font-size: 4em;
-    }
-    .dashboard-title p {
-      font-size: 1.025em;
-    }
+  /* DASHBOARD */
+  .dashboard-title h1{
+    font-size: 4em;
+  }
+  .dashboard-title p {
+    font-size: 1.025em;
+  }
+  .btn-edit i, .btn-delete i, .btn-add i, .btn-clear i {
+    padding: 4px 5px;
+  }
 }
 
 @media (min-width : 768px) and (max-width : 1024px) {
   /* DASHBOARD */
-  /* .dashboard-title {
-    padding-right: 10px;
-  } */
+  .dashboard-title {
+    padding-right: 2px;
+  }
+  .btn-edit i, .btn-delete i, .btn-add i, .btn-clear i {
+    padding: 4px 6px;
+  }
 }
 
 @media (min-width: 1025px) and (max-width: 1280px) {
   /* DASHBOARD */
-  /* .dashboard-title {
-    padding-right: 4px;
-  } */
+  .dashboard-title {
+    padding-right: 2px;
+  }
+  .btn-edit i, .btn-delete i, .btn-add i, .btn-clear i {
+    padding: 4px 6px;
+  }
 }
 
 @media (min-width: 1281px) {
   /* DASHBOARD */
-  /* .dashboard-title {
-    padding-right: 14px;
-  } */
+  .dashboard-title {
+    padding-right: 2px;
+  }
+  .btn-edit i, .btn-delete i, .btn-add i, .btn-clear i {
+    padding: 4px 7px;
+  }
 }

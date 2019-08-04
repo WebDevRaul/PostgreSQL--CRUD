@@ -1,14 +1,11 @@
-.crud-edit i {
-  margin: 5px 7px;
-}
-.crud-delete i {
-  margin: 5px 15px;
+.btn-edit i, .btn-delete i {
+  padding: 1px 2px;
 }
 
-.crud-edit i:hover {
+.btn-edit i:hover {
   cursor: pointer;
   color: rgb(1, 255, 1) !important;
 }
-.crud-delete i:hover {
+.btn-delete i:hover {
   color: red !important;
 }
