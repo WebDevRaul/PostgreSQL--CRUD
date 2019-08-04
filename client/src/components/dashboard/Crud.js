@@ -50,7 +50,7 @@ class Crud extends Component {
         <div className='row no-gutters mb-2'>
           <div className='col col-md-10 col-lg-6 m-auto'>
             <div className='row no-gutters'>
-              <div className='col-8 col-sm-8 col-lg-8 dashbord-form-input pr-2'>
+              <div className='col-8 col-sm-9 col-lg-8 dashbord-form-input pr-2'>
                 <div className='input-group'>
                   <input
                     type='text'
@@ -62,18 +62,18 @@ class Crud extends Component {
                   {error && <div className='invalid-feedback'>{error}</div>}
                 </div>
               </div>
-              <div className='col-4 col-sm-4 col-lg-4'>
-                <div className='row no-gutters dashboard-form-btn'>
-                  <div className='col-6 btn-add d-flex'>
-                    <button className='btn btn-primary d-flex m-auto' onClick={this.onEdit}>
-                      <i className={!edit ? 'fas fa-pen' : 'fas fa-check'}></i>
-                    </button>
-                  </div>
-                  <div className='col-6 btn-clear d-flex'>
-                    <button className='btn btn-danger m-auto d-flex' onClick={this.onDelete(id)}>
-                      <i className='far fa-times-circle m-auto'></i>
-                    </button>
-                  </div>
+              <div className='col-4 col-sm-3 col-lg-4 m-auto'>
+                <div className='d-flex float-right pr-2'>
+                  <div className='btn-edit d-flex pr-2'>
+                      <button className='btn btn-primary d-flex m-auto' onClick={this.onEdit}>
+                        <i className={!edit ? 'fas fa-pen' : 'fas fa-check'}></i>
+                      </button>
+                    </div>
+                    <div className='btn-delete d-flex'>
+                      <button className='btn btn-danger m-auto d-flex' onClick={this.onDelete(id)}>
+                        <i className='far fa-times-circle m-auto'></i>
+                      </button>
+                    </div>
                 </div>
               </div>
             </div>
