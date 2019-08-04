@@ -23,6 +23,7 @@ const LabelInput = ({
           <div className="input-group-text"><i className={icon}></i></div>
         </div>
         <input
+          autoComplete='true'
           type={type}
           className={classnames('form-control bg-transparent form-control-lg', {'is-invalid' : error})}
           placeholder={placeholder}
