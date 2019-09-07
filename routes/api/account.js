@@ -28,7 +28,7 @@ router.post('/register', (req, res, next) => {
   // Store account
   AccountTable.check_account({ email })
     .then(({ account }) => {
-      if(account) return res.status(409).json({ email: 'Email is already in use!' });
+      if(account !== undefined) return res.status(409).json({ email: 'Email is already in use!' });
       return AccountTable.create_account({ 
         first_name: first_name_hash,
         last_name: last_name_hash,

@@ -31,7 +31,7 @@ class AccountTable {
         [email],
         (error, respone) => {
           if(error) return reject(error);
-          resolve({ success: true })
+          resolve({ account: respone.rows[0] })
         }
       )
     })
