@@ -44,35 +44,43 @@ router.post('/register', (req, res, next) => {
 router.post('/sign-in', (req, res, next) => {
   const { email, password } = req.body;
 
-  AccountTable.get_account({ email })
+  // Check if account exists in DB
+  AccountTable.check_account({ email })
     .then(({ account }) => {
-      if(!account) {
-        return res.status(409).json({ email: 'Incorrect email or password!', password: 'Incorrect email or password!' })
-      }
-      // Compare passwords
-      const is_match = bcrypt.compareSync(password, account.password);
-
-      if(account && is_match) {
-        const user = { 
-          id: account.id, 
-          first_name:  decrypt(account.first_name, secretOrKey), 
-          last_name: decrypt(account.last_name, secretOrKey), 
-          email
-        };
-        jwt.sign(
-          user,
-          keys.secretOrKey,
-          { expiresIn: 3600 },
-          (error, token) => {
-            res.json({
-              success: true,
-              token: 'Bearer ' + token
-            });
+      if(account === undefined) return res.status(409).json({ 
+        email: 'Incorrect email or password!', password: 'Incorrect email or password!'
+       });
+       AccountTable.get_account({ email })
+        .then(({ account }) => {
+          if(!account) {
+            return res.status(409).json({ email: 'Incorrect email or password!', password: 'Incorrect email or password!' })
           }
-        );
-      } else {
-        return res.status(409).json({ email: 'Incorrect email or password!', password: 'Incorrect email or password!' })
-      }
+          // Compare passwords
+          const is_match = bcrypt.compareSync(password, account.password);
+
+          if(account && is_match) {
+            const user = { 
+              id: account.id, 
+              first_name:  decrypt(account.first_name, secretOrKey), 
+              last_name: decrypt(account.last_name, secretOrKey), 
+              email
+            };
+            jwt.sign(
+              user,
+              keys.secretOrKey,
+              { expiresIn: 3600 },
+              (error, token) => {
+                res.json({
+                  success: true,
+                  token: 'Bearer ' + token
+                });
+              }
+            );
+          } else {
+            return res.status(409).json({ email: 'Incorrect email or password!', password: 'Incorrect email or password!' })
+          }
+        })
+        .catch(e => next(e))
     })
     .catch(e => next(e))
 })
