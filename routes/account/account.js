@@ -55,7 +55,7 @@ class AccountTable {
         [email],
         (error, response) => {
           if(error) return reject(error);
-          const data = response.rows
+          const data = response.rows;
           // Return just 1 row of account data and 1 array of posts
           const { id, first_name, last_name, email, password } = data[0];
           let posts = [];
