@@ -15,6 +15,7 @@ import isEmpty from '../../../validation/isEmpty';
 
 // Css
 import '../../../css/sign-in.css';
+import Popover from './Popover';
 
 class SignIn extends Component {
   constructor() {
@@ -22,6 +23,7 @@ class SignIn extends Component {
     this.state = {
       email: '',
       password: '',
+      popover: false,
       errors: {
         email: '',
         password: ''
@@ -30,9 +32,15 @@ class SignIn extends Component {
   };
 
   componentDidMount() {
+    const { register } = this.props.register;
+    const { popover } = this.state;
     const { isAuthenticated } = this.props.account.account.isAuth;
     if (isAuthenticated) {
       this.props.history.push('/dashboard');
+    }
+
+    if(register.length > 1 && popover === false) {
+      this.setState({ popover: true })
     }
   }
 
@@ -52,6 +60,12 @@ class SignIn extends Component {
       this.props.clearPassword();
       this.props.clearEmail();
     }
+
+    const { popover } = this.state;
+    if (popover !== prevState.popover) {
+      setTimeout(() => this.setState({ popover: false }), 2000)
+    }
+
   }
 
   onChange = e => {
@@ -76,10 +90,11 @@ class SignIn extends Component {
   }
 
   render() {
-    const { errors } = this.state;
+    const { errors, popover } = this.state;
     return (
       <div className='sign-in'>
         <section className="py-5">
+          {popover ? <Popover /> : null}
           <div className="container py-5 mt-2">
             <div className="row no-gutters">
               <div className="col-md-6 mx-auto">
@@ -133,7 +148,8 @@ SignIn.propTypes = {
 
 const mapStateToProps = state => ({
   errors: state.errors,
-  account: state.account
+  account: state.account,
+  register: state.register
 });
 
 export default connect(mapStateToProps, { sign_in, clearEmail, clearPassword })(SignIn);

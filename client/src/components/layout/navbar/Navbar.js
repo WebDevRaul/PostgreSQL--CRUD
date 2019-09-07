@@ -42,13 +42,6 @@ class Navbar extends Component {
             onClick={this.onClick}
             ><span>Dashboard</span></Link>
         </li>
-        <li className="nav-item mr-3">
-          <Link 
-            to='/admin'
-            className='nav-link'
-            onClick={this.onClick}
-            ><span>Admin</span></Link>
-        </li>
         
         <li className="nav-item mr-3">
           <span
