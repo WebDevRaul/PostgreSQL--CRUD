@@ -1,63 +1,62 @@
-import { ERRORS, ACCOUNT, POST } from './types';
-import URL from '../../backend/URL';
 import axios from 'axios';
+import URL from './utils/URL';
+import { USER } from './types';
 import jwt_decode from 'jwt-decode';
-import setAuthToken from '../../utils/setAuthToken';
 
-export const register = (user_data, history) => dispatch => {
-  axios
-    .post(`${URL.account}/register`, user_data)
-    .then(res => dispatch({
-      type: ACCOUNT.REGISTER_USER,
-      payload: res.data.message
-    }))
-    .then(() => history.push('/sign-in'))
-    .catch(e => dispatch({
-      type: ERRORS.ERROR,
-      payload: e.response.data
-    }));
-};
-
-export const signIn = user_data => dispatch => {
-  axios
-    .post(`${URL.account}/sign-in`, user_data)
-    .then(res => {
-      const { token } = res.data;
-
-      // Set token to localStorage
-      localStorage.setItem('jwtToken', token);
-      // Decode token to get user data
-      const decoded = jwt_decode(token);
-      
-      dispatch(setCurrentUser(decoded));
+export const register = ({ data, history }) => dispatch => {
+  dispatch({ type: USER.LOADING });
+  axios.post(`${URL.account}/register`, data)
+    .then(() => {
+      dispatch({ type: USER.REGISTER });
+      dispatch({ type: USER.LOADED });
+      history.push('/sign-in');
     })
-    .catch(e => dispatch({
-      type: ERRORS.ERROR,
-      payload: e.response.data
-    }))
-}
-
-export const setCurrentUser = decoded => {
-  return {
-    type: ACCOUNT.SIGN_IN_USER,
-    payload: decoded
-  };
+    .catch(err => {
+      dispatch({ type: USER.ERROR, payload: err.response.data })
+      dispatch({ type: USER.LOADED });
+    })
 };
 
-export const setClearPosts = () => {
-  return {
-    type: POST.DELETE_ALL_POSTS,
-    payload: []
-  }
+export const signIn = obj => dispatch => {
+  dispatch({ type: USER.LOADING });
+  axios.post(`${URL.account}/sign-in`, obj)
+    .then(({ data: { token } }) => {
+      // Save to LocalStorage
+      localStorage.setItem('Crud_Token', token);
+      // Set Auth Token
+      setAuthToken(token);
+      // Set User
+      dispatch(setCurrentUser(token));
+      dispatch({ type: USER.LOADED });
+    })
+    .catch(err => {
+      dispatch({ type: USER.ERROR, payload: err.response.data })
+      dispatch({ type: USER.LOADED });
+    })
 }
 
 export const signOut = () => dispatch => {
-  // Remove token from localStorage
-  localStorage.removeItem('jwtToken');
-  // Remove auth header for future requests
+  // Remove token from localstorage
+  localStorage.removeItem('Crud_Token');
+  // Remove Auth Token
   setAuthToken(false);
-  // Set current user to {} which will set isAuthenticated to false
-  dispatch(setCurrentUser({}));
-  // Clear posts
-  dispatch(setClearPosts());
+  // Clear user (Redux)
+  dispatch(setRemoveUser());
 };
+
+export const setAuthToken = token => {
+  if (!token) return delete axios.defaults.headers.common['Authorization'];
+  axios.defaults.headers.common['Authorization'] = token;
+};
+
+export const setCurrentUser = token => {
+  return { type: USER.SIGN_IN, payload: jwt_decode(token) };
+};
+
+export const setRemoveUser = () => {
+  return { type: USER.SIGN_OUT }
+};
+
+export const clearUserErrors = () => {
+  return { type: USER.CLEAR_ERRORS }
+}

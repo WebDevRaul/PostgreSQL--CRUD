@@ -1,13 +1,21 @@
 import { combineReducers } from 'redux';
-import errors from './errors';
-import register from './register';
-import account from './authentication';
-import posts from './post';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import user from './user';
+import loading from './loading';
+import error from './error';
+
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['data', 'crud']
+};
 
 
-export default combineReducers({
-  errors,
-  register,
-  account,
-  posts
+const rootReducer =  combineReducers({
+  user,
+  loading,
+  error
 });
+
+export default persistReducer(persistConfig, rootReducer);

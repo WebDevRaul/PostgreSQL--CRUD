@@ -1,7 +1,7 @@
-const Validator = require('validator')
-const isEmpty = require('./isEmpty');
+import Validator from 'validator';
+import isEmpty from '../../common/utils/isEmpty';
 
-module.exports = validateRegisterForm = ({ first_name, last_name, email, password, password2 }) => {
+const validateRegister = ({ first_name, last_name, email, password, password2 }) => {
   let errors = {};
 
   // Check if Empty
@@ -37,3 +37,5 @@ module.exports = validateRegisterForm = ({ first_name, last_name, email, passwor
     isValid: isEmpty(errors)
   };
 }
+
+export default validateRegister;

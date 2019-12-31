@@ -4,14 +4,14 @@ import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { signOut } from '../../redux/actions/user';
+import { createStructuredSelector } from 'reselect';
+import { state_isAuth } from '../../redux/selectors/user';
 
 import Logo from './Logo';
 import Guest from './Guest';
 import User from './User';
 
-const isAuth = false;
-
-const Navbar = ({ signOut, history: { location: { pathname } } }) => {
+const Navbar = ({ isAuth, signOut, history: { location: { pathname } } }) => {
   const [show, setShow] = useState(false);
   const plus18px = (pathname === '/home' || pathname === '/sign-in') && ( window.innerWidth > 992 ) ? true : false;
 
@@ -43,8 +43,8 @@ Navbar.propTypes = {
   signOut: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => ({
-  
+const mapStateToProps = createStructuredSelector({
+  isAuth: state_isAuth
 });
 
 export default connect(mapStateToProps, { signOut })(withRouter(Navbar));

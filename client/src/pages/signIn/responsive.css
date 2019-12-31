@@ -1,0 +1,33 @@
+/* ////////////////////////////////////////////////////// */
+/* ////////////////////  RESPONSIVE  //////////////////// */
+/* ////////////////////////////////////////////////////// */
+
+@media only screen and (min-width : 992px) {
+  .sign-in {
+    padding-right: 18px;
+  }
+}
+
+@media only screen and (max-width : 576px) {
+  .sign-in {
+    padding: 0 20%;
+  }
+}
+
+@media only screen and (max-width : 425px) {
+  .sign-in {
+    padding: 0 15%;
+  }
+}
+
+@media only screen and (max-width : 375px) {
+  .sign-in {
+    padding: 0 7%;
+  }
+}
+
+@media only screen and (max-width : 320px) {
+  .sign-in {
+    padding: 0 5%;
+  }
+}

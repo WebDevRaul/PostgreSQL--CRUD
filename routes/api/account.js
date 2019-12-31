@@ -59,14 +59,18 @@ router.post('/sign-in', (req, res, next) => {
           const is_match = bcrypt.compareSync(password, account.password);
 
           if(account && is_match) {
-            const user = { 
-              id: account.id, 
-              first_name:  decrypt(account.first_name, secretOrKey), 
-              last_name: decrypt(account.last_name, secretOrKey), 
-              email
+            const data = { 
+              user: {
+                id: account.id, 
+                first_name:  decrypt(account.first_name, secretOrKey), 
+                last_name: decrypt(account.last_name, secretOrKey), 
+                email
+              },
+              isAuth: true
             };
+
             jwt.sign(
-              user,
+              data,
               keys.secretOrKey,
               { expiresIn: 3600 },
               (error, token) => {
@@ -77,7 +81,7 @@ router.post('/sign-in', (req, res, next) => {
               }
             );
           } else {
-            return res.status(409).json({ email: 'Incorrect email or password!', password: 'Incorrect email or password!' })
+            return res.status(409).json({ emailOrPassword: 'Incorrect email or password!' })
           }
         })
         .catch(e => next(e))

@@ -1,32 +1,41 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from './redux/store';
+import { BrowserRouter as Router } from 'react-router-dom';
+import HttpsRedirect from 'react-https-redirect';
 import setAuthToken from './utils/setAuthToken';
 import { setCurrentUser, signOut } from './redux/actions/user';
 import jwt_decode from 'jwt-decode';
-import { Provider } from 'react-redux';
-import store from './redux/store';
 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-if (localStorage.jwtToken) {
-  const decoded = jwt_decode(localStorage.jwtToken);
-  // Sign-in User
-  setAuthToken(localStorage.jwtToken);
-  store.dispatch(setCurrentUser(decoded));
+// Check Token
+if (localStorage.Crud_Token) {
+  const { Crud_Token } = localStorage;
+  const { exp } = jwt_decode(Crud_Token);
+  const time = Date.now() / 1000;
 
-  const currentTime = Date.now() / 1000;
-  if (decoded.exp < currentTime) {
-    // Sign-out ser
-    store.dispatch(signOut());
-    window.location.href = '/sign-in';
-  }
+  // Sign-In user
+  setAuthToken(Crud_Token);
+  store.dispatch(setCurrentUser(Crud_Token));
+
+  // Sign-Out user
+  if(exp < time) store.dispatch(signOut());
 }
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
-  </Provider>
+    <PersistGate persistor={persistor}>
+      <Router>
+        <HttpsRedirect>
+          <App />
+        </HttpsRedirect>
+      </Router>
+    </PersistGate>
+  </Provider> 
 , document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
