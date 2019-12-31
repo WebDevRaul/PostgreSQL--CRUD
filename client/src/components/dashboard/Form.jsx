@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addPost } from '../../redux/actions/post';
+import { addPost, deleteAll } from '../../redux/actions/post';
 
 import Input from '../common/form/input/Input';
 
-const Form = ({ id, addPost }) => {
+const Form = ({ id, addPost, deleteAll }) => {
   const [input, setInput] = useState('');
   const [temp, setTemp] = useState(1);
 
@@ -18,7 +18,7 @@ const Form = ({ id, addPost }) => {
     setInput('');
   }
 
-  const onDelete = () => {}
+  const onDelete = () => deleteAll({id})
 
   return (
     <div className='row no-gutters'>
@@ -44,7 +44,7 @@ const Form = ({ id, addPost }) => {
                   </button>
                 </div>
                 <div className='d-flex'>
-                  <button className='btn btn-danger btn-clear m-auto d-flex'onClick={onDelete}>
+                  <button className='btn btn-danger btn-clear m-auto d-flex' type='button' onClick={onDelete}>
                     <i className='far fa-times-circle m-auto'></i>
                   </button>
                 </div>
@@ -59,7 +59,8 @@ const Form = ({ id, addPost }) => {
 
 Form.propTypes = {
   id: PropTypes.string.isRequired,
-  addPost: PropTypes.func.isRequired
+  addPost: PropTypes.func.isRequired,
+  deleteAll: PropTypes.func.isRequired
 }
 
-export default connect(null, { addPost })(Form);
+export default connect(null, { addPost, deleteAll })(Form);

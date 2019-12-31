@@ -26,6 +26,19 @@ export const addPost = ({ id, post, temp }) => dispatch => {
 };
 
 
+export const deleteAll = id => dispatch => {
+  dispatch({ type: POST.DELETE_LOADING });
+  dispatch({ type: POST.DELETE_ALL_POSTS });
+  axios
+    .post(`${URL.post}/delete-all-posts`, id)
+    .then(() => dispatch({ type: POST.DELETE_LOADED }))
+    .catch(e => {
+      dispatch({ type: POST.DELETE_LOADED });
+      dispatch({ type: POST.ERROR, payload: e.response.data })
+    })
+};
+
+
 // export const add_post = data => dispatch => {
 //     // Expected Promise
 //     dispatch({ type: POST.EXP_ADD_POST, payload: data });
