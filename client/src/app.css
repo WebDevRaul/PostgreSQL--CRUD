@@ -6,6 +6,12 @@
 
 .app {
   background: linear-gradient(89deg, var(--red) 0%, var(--blue) 100% );
+  font-family: 'Gelasio', serif;
+  font-family: 'Inria Serif', serif;
+}
+
+.home, .register, .sign-in, .dashboard, .not-found {
+  min-height: calc(100vh - 88px);
 }
 
 button:focus, input:focus {
@@ -17,6 +23,10 @@ button:focus, input:focus {
 
 .btn-spinner {
   height: 36px;
+}
+.btn-clear, .btn-add {
+  min-height: 48px;
+  min-width: 48px;
 }
 .is-invalid {
   padding-right: 16px !important;
@@ -48,11 +58,11 @@ button:focus, input:focus {
   .app {
     font-size: 15px;
   }
+  .home, .register, .sign-in, .dashboard, .not-found {
+    min-height: calc(100vh - 86px);
+  }
   .form-group label {
     font-size: .8em;
-  }
-  .sign-in, .not-found, .home {
-    min-height: calc(100vh - 260px);
   }
   a, .special {
     font-size: 1.3em;
@@ -62,6 +72,9 @@ button:focus, input:focus {
 @media only screen and (max-width : 768px) {
   .app {
     font-size: 14px;
+  }
+  .home, .register, .sign-in, .dashboard, .not-found {
+    min-height: calc(100vh - 85px);
   }
   .btn-spinner {
     height: 40px;
@@ -83,6 +96,9 @@ button:focus, input:focus {
 @media only screen and (max-width : 576px) {
   .app {
     font-size: 12px;
+  }
+  .home, .register, .sign-in, .dashboard, .not-found {
+    min-height: calc(100vh - 100px);
   }
   .form-control {
     height: 36px !important;
@@ -107,10 +123,20 @@ button:focus, input:focus {
   .app {
     font-size: 10px;
   }
+  .home, .register, .sign-in, .dashboard, .not-found {
+    min-height: calc(100vh - 94px);
+  }
 }
 
 @media only screen and (max-width : 375px) {
   .app {
     font-size: 11px;
+  }
+  .home, .register, .sign-in, .dashboard, .not-found {
+    min-height: calc(100vh - 96px);
+  }
+  .btn-clear, .btn-add {
+    min-height: 36px;
+    min-width: 36px;
   }
 }

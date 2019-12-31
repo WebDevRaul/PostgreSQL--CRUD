@@ -19,7 +19,7 @@ router.post('/add-post', (req, res, next) => {
 })
 
 // Read text
-router.post('/post', (req, res, next) => {
+router.post('/set-post', (req, res, next) => {
   const { id } = req.body;
   
   AccountTable.get_account_by_id({ id })

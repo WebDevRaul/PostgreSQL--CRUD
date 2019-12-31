@@ -5,12 +5,11 @@ const initialState = {
 };
 
 const posts = (state=initialState, action) => {
+  const { payload } = action;
   switch(action.type) {
     case POST.SET_POST:
-      return {
-        ...state,
-        posts: action.payload
-      }
+      return { ...state, posts: payload }
+      
     case POST.EXP_ADD_POST:
       return {
         ...state,

@@ -1,17 +1,21 @@
 import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
+import isEmpty from '../../utils/isEmpty';
 
 
 const Input = ({ name, value, label, icon, type, error, onChange, onFocus, capitalize}) => {
   return (
-    <div className='form-group'>
-      <label 
-        className={classnames('ml-1 mb-0 text-primary', { 'text-danger': error, 'font-weight-bold': !error })} 
-        htmlFor={name}
-      >
-        { error ? error: label }
-      </label>
+    <div className={classnames({'form-group': !isEmpty(label)})}>
+      {
+        label &&
+        <label 
+          className={classnames('ml-1 mb-0 text-primary', { 'text-danger': error, 'font-weight-bold': !error })} 
+          htmlFor={name}
+        >
+          { error ? error: label }
+        </label>
+      }
       <div className='input-group'>
         {
           icon &&
