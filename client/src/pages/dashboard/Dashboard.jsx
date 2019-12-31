@@ -11,12 +11,13 @@ import Form from '../../components/dashboard/Form';
 const Dashboard = ({ user: { id, first_name } , setPost}) => {
   // Update posts CDM
   useEffect(() => {
-    setPost({id})
+    setPost({id});
+    // eslint-disable-next-line
   },[])
   return(
     <div className='dashboard'>
       <Title />
-      <Form />
+      <Form id={id} />
     </div>
   )
 }

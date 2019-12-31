@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { addPost } from '../../redux/actions/post';
 
 import Input from '../common/form/input/Input';
 
-const Form = () => {
+const Form = ({ id, addPost }) => {
   const [input, setInput] = useState('');
+  const [temp, setTemp] = useState(1);
 
   const onChange = e => setInput(e.target.value);
 
   const onSubmit = e => {
     e.preventDefault();
-    
+    addPost({ id, post: input, temp });
+    setTemp(temp+1)
+    setInput('');
   }
 
-  const onDelete = () => {
-    
-  }
+  const onDelete = () => {}
 
   return (
     <div className='row no-gutters'>
@@ -56,7 +58,8 @@ const Form = () => {
 }
 
 Form.propTypes = {
-
+  id: PropTypes.string.isRequired,
+  addPost: PropTypes.func.isRequired
 }
 
-export default connect(null, {  })(Form);
+export default connect(null, { addPost })(Form);

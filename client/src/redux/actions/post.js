@@ -10,6 +10,22 @@ export const setPost = id => dispatch => {
 };
 
 
+export const addPost = ({ id, post, temp }) => dispatch => {
+  dispatch({ type: POST.ADD_LOADING });
+  dispatch({ type: POST.EXP_ADD_POST, payload: { post, id: temp }});
+  axios
+    .post(`${URL.post}/add-post`, { id, post })
+    .then(({ data: { post } }) => {
+      dispatch({ type: POST.ADD_POST, payload: { ...post, temp } })
+      dispatch({ type: POST.ADD_LOADED });
+    })
+    .catch(e => {
+      dispatch({ type: POST.ADD_LOADED });
+      dispatch({ type: POST.ERROR, payload: e.response.data })
+    })
+};
+
+
 // export const add_post = data => dispatch => {
 //     // Expected Promise
 //     dispatch({ type: POST.EXP_ADD_POST, payload: data });

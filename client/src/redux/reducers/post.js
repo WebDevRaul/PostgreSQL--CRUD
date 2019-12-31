@@ -8,23 +8,14 @@ const posts = (state=initialState, action) => {
   const { payload } = action;
   switch(action.type) {
     case POST.SET_POST:
-      return { ...state, posts: payload }
-      
+      return { ...state, posts: payload };
     case POST.EXP_ADD_POST:
-      return {
-        ...state,
-        posts: [...state.posts, { post: action.payload.post, id: action.payload.exp }]
-      }
+      return { ...state, posts: [...state.posts, payload ]};
     case POST.ADD_POST:
-      return {
-        ...state,
-        posts: [
-          // remove old post
-          ...state.posts.filter(item => item.id !== action.payload.exp), 
-          // add new post w/o the exp data
-          { post: action.payload.post, id: action.payload.id, position: action.payload.position }
-        ]
-      }
+      return { ...state, posts: [ ...state.posts.filter(post => post.id !== payload.temp),
+        { post: payload.post, id: payload.id, position: payload.position } ]};
+
+
     case POST.EXP_UPDATE_POST:
       const old_position = state.posts.find(item => item.id === action.payload.id).position;
       return {
