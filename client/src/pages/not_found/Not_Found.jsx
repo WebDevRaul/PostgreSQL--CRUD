@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const NotFound = () => (
   <div className='not-found d-flex'>
@@ -18,4 +18,4 @@ const NotFound = () => (
   </div>
 );
 
-export default withRouter(NotFound);
+export default NotFound;
