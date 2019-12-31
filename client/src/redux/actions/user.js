@@ -18,7 +18,7 @@ export const register = (user_data, history) => dispatch => {
     }));
 };
 
-export const sign_in = user_data => dispatch => {
+export const signIn = user_data => dispatch => {
   axios
     .post(`${URL.account}/sign-in`, user_data)
     .then(res => {
@@ -51,7 +51,7 @@ export const setClearPosts = () => {
   }
 }
 
-export const sign_out = () => dispatch => {
+export const signOut = () => dispatch => {
   // Remove token from localStorage
   localStorage.removeItem('jwtToken');
   // Remove auth header for future requests
