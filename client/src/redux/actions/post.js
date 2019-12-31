@@ -26,12 +26,29 @@ export const addPost = ({ id, post, temp }) => dispatch => {
 };
 
 
+export const deletePost = id => dispatch => {
+  dispatch({ type: POST.EDIT_LOADING });
+  axios
+    .post(`${URL.post}/delete-post`, id)
+    .then(() => {
+      dispatch({ type: POST.DELETE_POST, payload: id })
+      dispatch({ type: POST.EDIT_LOADED})
+    })
+    .catch(e => {
+      dispatch({ type: POST.EDIT_LOADED});
+      dispatch({ type: POST.ERROR, payload: e.response.data })
+    })
+};
+
+
 export const deleteAll = id => dispatch => {
   dispatch({ type: POST.DELETE_LOADING });
-  dispatch({ type: POST.DELETE_ALL_POSTS });
   axios
     .post(`${URL.post}/delete-all-posts`, id)
-    .then(() => dispatch({ type: POST.DELETE_LOADED }))
+    .then(() => {
+      dispatch({ type: POST.DELETE_ALL_POSTS })
+      dispatch({ type: POST.DELETE_LOADED })
+    })
     .catch(e => {
       dispatch({ type: POST.DELETE_LOADED });
       dispatch({ type: POST.ERROR, payload: e.response.data })
@@ -88,17 +105,3 @@ export const deleteAll = id => dispatch => {
 //     }));
 // };
 
-// export const delete_all_posts = id => dispatch => {
-//   // Expected promise
-//   dispatch({ type: POST.EXP_DELETE_ALL_POSTS, payload: [] });
-//   axios
-//     .post(`${URL.post}/delete-all-posts`, id)
-//     .then(success => dispatch({
-//       type: POST.DELETE_ALL_POSTS,
-//       payload: []
-//     }))
-//     .catch(e => dispatch({
-//       type: ERRORS.ERROR,
-//       payload: e.response.data
-//     }));
-// };

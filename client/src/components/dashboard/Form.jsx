@@ -13,7 +13,7 @@ const Form = ({ id, addPost, deleteAll }) => {
 
   const onSubmit = e => {
     e.preventDefault();
-    addPost({ id, post: input, temp });
+    addPost({ id, post: input, temp: `temp${temp}` });
     setTemp(temp+1)
     setInput('');
   }

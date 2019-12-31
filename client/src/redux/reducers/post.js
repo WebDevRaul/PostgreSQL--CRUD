@@ -31,17 +31,9 @@ const posts = (state=initialState, action) => {
           ...state,
           posts: [...state.posts.filter(item => item.id !== action.payload.id), action.payload]
         }
-    case POST.EXP_DELETE_ONE_POST:
-      return {
-        ...state,
-        posts: state.posts.filter(item => item.id !== action.payload)
-      }
-    case POST.DELETE_ONE_POST:
-      return {
-        ...state,
-        posts: state.posts.filter(item => item.id !== action.payload)
-      }
-
+    
+    case POST.DELETE_POST:
+      return { ...state, posts: state.posts.filter(post => post.id !== payload.id) }
     case POST.DELETE_ALL_POSTS:
       return { ...state,  posts: [] };
     default:
