@@ -1,5 +1,0 @@
-@import './app.css';
-
-.register-header-bg {
-  background: linear-gradient(89deg, var(--red) 0%, var(--blue) 100% );
-}

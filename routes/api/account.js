@@ -48,12 +48,12 @@ router.post('/sign-in', (req, res, next) => {
   AccountTable.check_account({ email })
     .then(({ account }) => {
       if(account === undefined) return res.status(409).json({ 
-        email: 'Incorrect email or password!', password: 'Incorrect email or password!'
+        emailOrPassword: 'Incorrect email or password!'
        });
        AccountTable.get_account({ email })
         .then(({ account }) => {
           if(!account) {
-            return res.status(409).json({ email: 'Incorrect email or password!', password: 'Incorrect email or password!' })
+            return res.status(409).json({ emailOrPassword: 'Incorrect email or password!' })
           }
           // Compare passwords
           const is_match = bcrypt.compareSync(password, account.password);
