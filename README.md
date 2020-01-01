@@ -1,6 +1,12 @@
 # PostgreSQL-CRUD
 CREATE - READ - UPDATE - DELETE with PostgreSQL
 
+## How it works
+Register & Sign In  
+Add your post
+Edit your post
+Delete your post
+
 ## Screenshots
 | Home | Add Post | Edit Post | Delete Post |
 |:----:|:----:|:----:|:-------:|
