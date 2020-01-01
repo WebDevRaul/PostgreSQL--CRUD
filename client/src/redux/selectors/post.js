@@ -8,13 +8,8 @@ export const state_posts = createSelector(
   state => state
 );
 
-export const state_edit_isLoading = createSelector(
+export const state_delete_isLoading = createSelector(
   [select_isLoading_state],
-  state => state.edit.isLoading
-);
-
-export const state_add_isLoading = createSelector(
-  [select_isLoading_state],
-  state => state.add.isLoading
+  state => state.delete.isLoading
 );
 

@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { addPost, deleteAll } from '../../redux/actions/post';
+import { createStructuredSelector } from 'reselect';
+import { state_delete_isLoading } from '../../redux/selectors/post';
 
 import Input from '../common/form/input/Input';
+import Spinner from '../common/spinner/Spinner';
 
-const Form = ({ id, addPost, deleteAll }) => {
+const Form = ({ id, addPost, deleteAll, isLoading }) => {
   const [input, setInput] = useState('');
   const [temp, setTemp] = useState(1);
 
@@ -44,8 +48,10 @@ const Form = ({ id, addPost, deleteAll }) => {
                   </button>
                 </div>
                 <div className='d-flex'>
-                  <button className='btn btn-danger btn-clear m-auto d-flex' type='button' onClick={onDelete}>
-                    <i className='far fa-times-circle m-auto'></i>
+                  <button 
+                    className={classnames('btn btn-danger btn-clear m-auto d-flex justify-content-center', {'disabled p-0' : isLoading})}onClick={onDelete} type='button'
+                  >
+                    {isLoading ? <Spinner isClass='btn-spinner'/>:<i className='far fa-times-circle m-auto'></i>}
                   </button>
                 </div>
               </div>
@@ -60,7 +66,12 @@ const Form = ({ id, addPost, deleteAll }) => {
 Form.propTypes = {
   id: PropTypes.string.isRequired,
   addPost: PropTypes.func.isRequired,
-  deleteAll: PropTypes.func.isRequired
+  deleteAll: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired
 }
 
-export default connect(null, { addPost, deleteAll })(Form);
+const mapStateToProps = createStructuredSelector({
+  isLoading: state_delete_isLoading
+})
+
+export default connect(mapStateToProps, { addPost, deleteAll })(Form);

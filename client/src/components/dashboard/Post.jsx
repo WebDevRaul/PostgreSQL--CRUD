@@ -2,15 +2,18 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
-import { deletePost } from '../../redux/actions/post';
+import { deletePost, updatePost } from '../../redux/actions/post';
+import { createStructuredSelector } from 'reselect';
+import { state_user } from '../../redux/selectors/user';
 
 import Spinner from '../common/spinner/Spinner';
 
-const Post = ({ post, id, deletePost }) => {
+const Post = ({ post, id, position, deletePost, updatePost, user }) => {
   const [input, setInput] = useState('');
   const [edit, setEdit] = useState(false);
   const [isLoading, setLoading] = useState(false);
-  const update = id.startsWith('temp') ? true : false;
+  const [temp, setTemp] = useState(1);
+  const update = id.startsWith('temp') ? true : id.startsWith('update') ? true : false;
 
   useEffect(() => {
     setLoading(update);
@@ -25,11 +28,12 @@ const Post = ({ post, id, deletePost }) => {
   const onChange = e => setInput(e.target.value);
   const onEdit = () => {
     setEdit(!edit);
-    if(edit) console.log('test')
+    if(edit) updatePost({ post: input, id, position, temp: `update${id}`, account_id: user.id });
+    setTemp(temp+1);
   };
   const onDelete = () => {
     setLoading(true);
-    deletePost({id})
+    deletePost({ id, account_id: user.id })
   }
 
   const onSubmit = e => e.preventDefault();
@@ -82,7 +86,14 @@ const Post = ({ post, id, deletePost }) => {
 Post.propTypes = {
   post: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  deletePost: PropTypes.func.isRequired
+  position: PropTypes.number,
+  deletePost: PropTypes.func.isRequired,
+  updatePost: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired
 }
 
-export default connect(null, { deletePost } )(Post);
+const mapStateToProps = createStructuredSelector({
+  user: state_user
+})
+
+export default connect(mapStateToProps, { deletePost, updatePost } )(Post);

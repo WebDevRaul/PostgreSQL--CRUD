@@ -5,12 +5,6 @@ const INITIAL_STATE = {
     isLoading: false
   },
   post: {
-    add: {
-      isLoading: false
-    },
-    edit: {
-      isLoading: false
-    },
     delete: {
       isLoading: false
     }

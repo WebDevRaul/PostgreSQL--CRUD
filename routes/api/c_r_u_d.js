@@ -60,7 +60,7 @@ router.post('/delete-all-posts', (req, res, next) => {
 });
 
 // Update post
-router.put('/update-post', (req, res, next) => {
+router.post('/update-post', (req, res, next) => {
   const { id, post, account_id } = req.body;
   AccountTable.get_account_by_id({ id: account_id })
     .then(({ success }) => {

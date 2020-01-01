@@ -14,24 +14,17 @@ const posts = (state=initialState, action) => {
     case POST.ADD_POST:
       return { ...state, posts: [ ...state.posts.filter(post => post.id !== payload.temp),
         { post: payload.post, id: payload.id, position: payload.position } ]};
-
-
     case POST.EXP_UPDATE_POST:
-      const old_position = state.posts.find(item => item.id === action.payload.id).position;
-      return {
-        ...state,
-        // remove old post
-        posts: [...state.posts.filter(item => item.id !== action.payload.id), 
-        // udpate post
-        { post: action.payload.post, id: action.payload.id, position: old_position }
-        ]
-      }
+      const old_position = state.posts.find(post => post.id === payload.id).position;
+      return { ...state, 
+        posts: [...state.posts.filter(post => post.id !== payload.id), 
+        { post: payload.post, id: payload.temp, position: old_position }
+      ]}
     case POST.UPDATE_POST:
-        return {
-          ...state,
-          posts: [...state.posts.filter(item => item.id !== action.payload.id), action.payload]
-        }
-    
+        return { ...state, 
+          posts: [...state.posts.filter(post => post.id !== payload.temp),
+        { post: payload.post, id: payload.id, position: payload.position }
+        ]}
     case POST.DELETE_POST:
       return { ...state, posts: state.posts.filter(post => post.id !== payload.id) }
     case POST.DELETE_ALL_POSTS:
