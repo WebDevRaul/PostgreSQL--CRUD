@@ -4,7 +4,7 @@ CREATE - READ - UPDATE - DELETE with PostgreSQL
 ## Screenshots
 | Home | Add Post | Edit Post | Delete Post |
 |:----:|:----:|:----:|:-------:|
-|![](image/home.jpg) | ![](image/create/jpg) | ![](image/edit.jpg)| ![](image/delete.jpg)
+|![](image/home.jpg) | ![](image/create.jpg) | ![](image/edit.jpg)| ![](image/delete.jpg)
 
 ## Built With
 - Front-end
