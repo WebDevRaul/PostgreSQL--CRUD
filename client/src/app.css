@@ -141,6 +141,5 @@ button:focus, input:focus {
   }
   .btn-clear, .btn-add {
     min-height: 36px;
-    min-width: 36px;
   }
 }
