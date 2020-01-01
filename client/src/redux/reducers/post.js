@@ -1,4 +1,4 @@
-import { POST } from '../actions/types';
+import { POST, USER } from '../actions/types';
 
 const initialState = {
   posts: []
@@ -29,6 +29,8 @@ const posts = (state=initialState, action) => {
       return { ...state, posts: state.posts.filter(post => post.id !== payload.id) }
     case POST.DELETE_ALL_POSTS:
       return { ...state,  posts: [] };
+    case USER.SIGN_OUT:
+      return { ...state, posts: [] };
     default:
       return state; 
   };
